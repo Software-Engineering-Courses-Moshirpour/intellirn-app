@@ -12,6 +12,7 @@ import { postCall } from '../helpers/postCall';
 const CreateSurvey = () => {
 
   const [cart, setCart] = useState([]);
+  const [surveyname, setSurveyName] = useState("");
 
   const [cid, setCid] = useState(cart.length+1);
 
@@ -279,6 +280,22 @@ const handleUpdate =(e)=>{
       <div className='col-lg-7'>
         <div className='card shadow mb-4'>
           <div className='card-body'>
+            <h3>Enter Survey Name</h3>
+
+            <input
+                type='text'
+                className='form-control'
+                id='formImgUrl'
+                name='formImgUrl'
+                placeholder='Name of Survey here'
+                maxLength='250'
+                value={surveyname}
+                onChange={(e) => {
+                  setSurveyName( e.target.value );
+                }}
+
+              />
+              <hr></hr>
             <div className='table-responsive'>
               <h3>Question List</h3>
               <table className='table table-bordered table-hover' id='dataTable' width='50%' cellSpacing='0'>
