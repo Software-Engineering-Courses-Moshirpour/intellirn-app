@@ -6,6 +6,7 @@ import AddSurveyPage from './pages/AddSurveyPage';
 import Home from './pages/Home';
 import AdminHome from './pages/AdminHome';
 import Help from './pages/Help';
+import HelpDetails from './pages/HelpDetails';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
     <Routes>
     <Route path='/create-survey' element={<AddSurveyPage />} />
     <Route path='/admin' element={<AdminHome />} />
-    <Route path='/education' element={<Help />} />
+    <Route path='/help' element={<Help />} />
+    <Route path='/help/:id' element={<HelpDetails />} />
     <Route path='/' element={<Home />} />
 
     </Routes>
