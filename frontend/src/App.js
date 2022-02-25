@@ -7,12 +7,16 @@ import Home from './pages/Home';
 import AdminHome from './pages/AdminHome';
 import Help from './pages/Help';
 import HelpDetails from './pages/HelpDetails';
+import ManageHelp from './pages/ManageHelp';
+import ManageSurveyPage from './pages/ManageSurveyPage';
 
 function App() {
   return (
     <BrowserRouter>
     <Routes>
     <Route path='/create-survey' element={<AddSurveyPage />} />
+    <Route path='/managesurvey' element={<ManageHelp />} />
+    <Route path='/managesurvey/:id' element={<ManageSurveyPage />} />
     <Route path='/admin' element={<AdminHome />} />
     <Route path='/help' element={<Help />} />
     <Route path='/help/:id' element={<HelpDetails />} />
