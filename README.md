@@ -17,23 +17,14 @@ Initial Brainstorming for HPTP App or web-based application
    2. Types of infections
    3. Prevention
 
-3. Booking appointments
-
-   1. Appointment notification
-   2. Clinic is running late notification
-
-4. Access to health information (linked with my health alberta)
-
-5. Virtual Clinic tours / what to expect
-
-6. Bot assisted problem solving
+3. Bot assisted problem solving
 
    1. Assessing your IV
    2. Pump challenges
    3. Allergic reactions
    4. Side effects of antibiotics
 
-7. When to access further help
+4. When to access further help
 
    1. HPTP RN
    2. 811
