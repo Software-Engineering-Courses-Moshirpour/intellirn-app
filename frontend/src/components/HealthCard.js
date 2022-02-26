@@ -8,7 +8,11 @@ const HelpCard = () => {
   const url = '/api/survey?searchBy=surveyurl&searchTerm=';
   const { id } = useParams();
   let thisurl = url + id;
+  //const { data } = useFetch(thisurl);
 
+  const { loading, data } = useFetch(thisurl);
+  console.log(thisurl);
+  console.log(data);
   const [choices, setChoices] = useState([]);
   const [content, setContent] = useState('Please click begin to get started');
 
@@ -19,11 +23,31 @@ const HelpCard = () => {
   //   },
   // ]);
 
-  const { data } = useFetch(thisurl);
-  console.log(data);
+
+  useEffect(() => {
+    console.log("tryting to log some statement");
+    console.log(data);
+    if(data.length>0){
+      console.log("data detected");
+      setChoices([
+        {
+          nid: data[0]['questionList'][0]['questionId'], //essentially getting the topnode
+          name: 'Begin',
+        },
+      ]);
+      console.log("Choices length: " + choices.length);
+
+    }
+
+
+
+  }, [!loading]);
+
+
 
   const handleSelect = (e) => {
     console.log(e.target.value);
+    console.log("Choices length: " + choices[0]["nid"]);
     let newChoices = [];
     for (var i = 0; i < data[0]['questionList'].length; i++) {
       if (data[0]['questionList'][i]['questionId'] == e.target.value) {
@@ -49,6 +73,7 @@ const HelpCard = () => {
             {choices?.map((dataItem) => {
               let { nid, name } = dataItem;
               console.log('name: ' + name);
+              console.log('id: ' + nid);
 
               return (
                 <tr key={name}>
