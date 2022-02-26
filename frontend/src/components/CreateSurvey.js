@@ -8,7 +8,7 @@ import { postCall } from '../helpers/postCall';
 
 
 
-
+const url = '/api/survey';
 const CreateSurvey = () => {
 
   const [cart, setCart] = useState([]);
@@ -19,10 +19,10 @@ const CreateSurvey = () => {
   const [btnName, setBtnName] = useState("Add");
 
   const [details, setDetails] = useState({
-    id: '',
+    questionId: '',
     stem: '',
     content: '',
-    imageurl: '',
+    imageUrl: '',
     uid: '',
 
   });
@@ -34,10 +34,10 @@ const CreateSurvey = () => {
     if(btnName != "Update"){
       newCart.push({
 
-        "id": cart.length+1,
+        "questionId": cart.length+1,
         "stem": details["stem"],
         "content": details["content"],
-        "imageurl": details["imageurl"],
+        "imageUrl": details["imageUrl"],
         "uid": details["uid"],
       })
       setCid(cart.length+1)
@@ -47,12 +47,12 @@ const CreateSurvey = () => {
       {
 
 
-        if(newCart[i]["id"] == cid)
+        if(newCart[i]["questionId"] == cid)
         {
           console.log("update target found");
           newCart[i]["stem"] = details["stem"];
           newCart[i]["content"] = details["content"];
-          newCart[i]["imageurl"] = details["imageurl"];
+          newCart[i]["imageUrl"] = details["imageUrl"];
           newCart[i]["uid"] = details["uid"];
 
 
@@ -71,10 +71,10 @@ const CreateSurvey = () => {
 
 
     setDetails({
-      id: '',
+      questionId: '',
       stem: '',
       content: '',
-      imageurl: '',
+      imageUrl: '',
       uid: '',
     });
 
@@ -86,7 +86,7 @@ const CreateSurvey = () => {
   function arrayRemove(arr, value) {
 
     return arr.filter(function(ele){
-        return ele["id"] != value;
+        return ele["questionId"] != value;
     });
 }
 
@@ -98,14 +98,14 @@ const handleUpdate =(e)=>{
       {
         console.log(e.target.value);
 
-        if(newCart[i]["id"] == e.target.value)
+        if(newCart[i]["questionId"] == e.target.value)
         {
-          tempDetails["id"] = newCart[i]["id"];
+          tempDetails["questionId"] = newCart[i]["questionId"];
           tempDetails["stem"] = newCart[i]["stem"];
           tempDetails["content"] = newCart[i]["content"];
-          tempDetails["imageurl"] = newCart[i]["imageurl"];
+          tempDetails["imageUrl"] = newCart[i]["imageUrl"];
           tempDetails["uid"] = newCart[i]["uid"];
-          setCid(tempDetails["id"]);
+          setCid(tempDetails["questionId"]);
           setDetails(tempDetails);
           setBtnName("Update");
 
@@ -130,9 +130,9 @@ const handleUpdate =(e)=>{
       {
         console.log(e.target.value);
 
-        if(newCart[i]["id"] == e.target.value)
+        if(newCart[i]["questionId"] == e.target.value)
         {
-          newCart = arrayRemove(newCart,newCart[i]["id"]);
+          newCart = arrayRemove(newCart,newCart[i]["questionId"]);
 
 
         }
@@ -144,7 +144,7 @@ const handleUpdate =(e)=>{
       {
         console.log(e.target.value);
 
-        newCart[i]["id"] =i+1;
+        newCart[i]["questionId"] =i+1;
 
 
 
@@ -158,7 +158,40 @@ const handleUpdate =(e)=>{
   }
 
   const handleSubmit =(e)=>{
+    console.log(surveyname);
+    let surveryURL = surveyname.replace(/\s+/g, '-').toLowerCase();;
+    console.log(surveryURL);
     console.log(cart);
+
+    let message = {
+      "surveyUrl": surveryURL,
+    "title": surveyname,
+    "description": "",
+    "imageUrl": "",
+    "questionList": cart
+
+    }
+
+    postCall(url, message).then((result) => {
+      window.alert(result['data']['message']);
+      if (result['status'] === 200) {
+        setCart([]);
+        setCid(cart.length+1);
+        setDetails({
+          questionId: '',
+          stem: '',
+          content: '',
+          imageUrl: '',
+          uid: '',
+        });
+
+
+
+      }
+    });
+
+
+
 
 
   }
@@ -236,9 +269,9 @@ const handleUpdate =(e)=>{
                 name='formImgUrl'
                 placeholder='health.com/hi.png'
                 maxLength='250'
-                value={details['imageurl']}
+                value={details['imageUrl']}
                 onChange={(e) => {
-                  setDetails({ ...details, imageurl: e.target.value });
+                  setDetails({ ...details, imageUrl: e.target.value });
                 }}
 
               />
@@ -322,21 +355,21 @@ const handleUpdate =(e)=>{
                 </tfoot>
                 <tbody>
                   {cart.map((dataItem) => {
-                    let { id, stem, content, imageurl, uid } = dataItem;
+                    let { questionId, stem, content, imageUrl, uid } = dataItem;
 
 
 
                     return (
-                      <tr key={id}>
+                      <tr key={questionId}>
                         <td>
 
-                            {id}
+                            {questionId}
 
                         </td>
                         <th>{content}</th>
                         <th>{uid}</th>
-                        <td><button onClick={(e) => handleUpdate(e)} value={id} className="btn btn-alert btn-sm">Edit</button></td>
-                        <td><button onClick={(e) => handleDel(e)} value={id} className="btn btn-alert btn-sm">Delete</button></td>
+                        <td><button onClick={(e) => handleUpdate(e)} value={questionId} className="btn btn-alert btn-sm">Edit</button></td>
+                        <td><button onClick={(e) => handleDel(e)} value={questionId} className="btn btn-alert btn-sm">Delete</button></td>
 
                       </tr>
                     );
