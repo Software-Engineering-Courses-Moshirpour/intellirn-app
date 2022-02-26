@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "be9a0962-7726-4ad1-b05b-f0c9287edfde",
+		"name": "IntelliRN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Education",
+			"item": [
+				{
+					"name": "Get education",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/education",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"education"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get education by URL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/education?searchBy=educationurl&searchTerm=how-to-deal-with-allergic-reaction",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"education"
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "educationurl"
+								},
+								{
+									"key": "searchTerm",
+									"value": "how-to-deal-with-allergic-reaction"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get education by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/education/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"education",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add education",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"educationUrl\": \"how-to-have-cute-cats\",\r\n    \"title\": \"Cute cats\",\r\n    \"description\": \"Let us fond out how cute cats are. Bla bla bla\",\r\n    \"imageUrl\": \"https://images.unsplash.com/photo-1615789591457-74a63395c990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZG9tZXN0aWMlMjBjYXR8ZW58MHx8MHx8&w=1000&q=80\",\r\n    \"youtubeUrl\": \"https://www.youtube.com/watch?v=uHKfrz65KSU\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/education",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"education"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify education",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"educationUrl\": \"how-to-have-cute-cats\",\r\n    \"title\": \"Cats are not cute\",\r\n    \"description\": \"Let us find out why cats are not cute. Bla bla bla\",\r\n    \"imageUrl\": \"https://images.unsplash.com/photo-1615789591457-74a63395c990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZG9tZXN0aWMlMjBjYXR8ZW58MHx8MHx8&w=1000&q=80\",\r\n    \"youtubeUrl\": \"https://www.youtube.com/watch?v=uHKfrz65KSU\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/education/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"education",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete education",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/education/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"education",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Survey",
+			"item": [
+				{
+					"name": "Get survey",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/survey",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"survey"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get survey by URL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/survey?searchBy=surveyurl&searchTerm=allergic-reaction",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"survey"
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "surveyurl"
+								},
+								{
+									"key": "searchTerm",
+									"value": "allergic-reaction"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get survey by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/survey/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"survey",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add survey",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"surveyUrl\": \"pump-problems\",\r\n    \"title\": \"Problems with your pump\",\r\n    \"description\": \"Take a survey for any problem with your pump\",\r\n    \"imageUrl\": \"https://contents.mediadecathlon.com/p1910907/k$dfbb4876f92a49bd4f3879fcd25d6605/double-action-kayak-hand-pump-2-x-26l-orange.jpg\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionId\": 1,\r\n            \"content\": \"Are you having a problem with your pump?\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"Are you having a problem with your pump?\",\r\n            \"uid\": null\r\n        },\r\n        {\r\n            \"questionId\": 2,\r\n            \"content\": \"Is your pump beeping?\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"Yes\",\r\n            \"uid\": 1\r\n        },\r\n        {\r\n            \"questionId\": 3,\r\n            \"content\": \"Press SILENCE\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"Yes\",\r\n            \"uid\": 2\r\n        },\r\n        {\r\n            \"questionId\": 4,\r\n            \"content\": \"No actions needed!\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"No\",\r\n            \"uid\": 1\r\n        },\r\n        {\r\n            \"questionId\": 5,\r\n            \"content\": \"What does your pump say?\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"No\",\r\n            \"uid\": 2\r\n        },\r\n        {\r\n            \"questionId\": 6,\r\n            \"content\": \"Is there a kink or blockage in your tubing (given instructions on what to look for)?\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"DISTAL OCCLUSION\",\r\n            \"uid\": 5\r\n        },\r\n        {\r\n            \"questionId\": 7,\r\n            \"content\": \"Remove Kink\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"Yes\",\r\n            \"uid\": 6\r\n        },\r\n        {\r\n            \"questionId\": 8,\r\n            \"content\": \"Is there a problem with your IV site (given instructions on how to assess IV site)?\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"No\",\r\n            \"uid\": 6\r\n        },\r\n        {\r\n            \"questionId\": 9,\r\n            \"content\": \"Call clinic nurses at ### to arrange for new IV site\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"Yes\",\r\n            \"uid\": 8\r\n        },\r\n        {\r\n            \"questionId\": 10,\r\n            \"content\": \"Then we also do not know what is the problem\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"No\",\r\n            \"uid\": 8\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/survey",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"survey"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify survey",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"surveyUrl\": \"allergic-reaction\",\r\n    \"title\": \"Allergic Reaction\",\r\n    \"description\": \"Take a survey for allergic reaction\",\r\n    \"imageUrl\": \"https://image.shutterstock.com/z/stock-vector-girl-with-allergies-vector-flat-illustration-400504429.jpg\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionId\": 1,\r\n            \"content\": \"Are you having a allergic reaction?\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"Are you having a allergic reaction?\",\r\n            \"uid\": null\r\n        },\r\n        {\r\n            \"questionId\": 2,\r\n            \"content\": \"Did you get rashes?\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"Yes\",\r\n            \"uid\": 1\r\n        },\r\n        {\r\n            \"questionId\": 3,\r\n            \"content\": \"Apply powerder\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"Yes\",\r\n            \"uid\": 2\r\n        },\r\n        {\r\n            \"questionId\": 4,\r\n            \"content\": \"No actions needed!\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"No\",\r\n            \"uid\": 1\r\n        },\r\n        {\r\n            \"questionId\": 5,\r\n            \"content\": \"What does your rashes say?\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"No\",\r\n            \"uid\": 2\r\n        },\r\n        {\r\n            \"questionId\": 6,\r\n            \"content\": \"Does it pain?\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"STH STH\",\r\n            \"uid\": 5\r\n        },\r\n        {\r\n            \"questionId\": 7,\r\n            \"content\": \"Remove rashes\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"Yes\",\r\n            \"uid\": 6\r\n        },\r\n        {\r\n            \"questionId\": 8,\r\n            \"content\": \"Does it itch?\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"No\",\r\n            \"uid\": 6\r\n        },\r\n        {\r\n            \"questionId\": 9,\r\n            \"content\": \"Call clinic nurses at ### to arrange for new IV site\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"Yes\",\r\n            \"uid\": 8\r\n        },\r\n        {\r\n            \"questionId\": 10,\r\n            \"content\": \"Then we also do not know what is the problem\",\r\n            \"imageUrl\": null,\r\n            \"stem\": \"No\",\r\n            \"uid\": 8\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/survey/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"survey",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete survey",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/survey/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"survey",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
