@@ -12,10 +12,7 @@ Below are steps to run the application
 
 3. Connect to your MySQL server using an admin user like `root`.
 
-4. Run the below scripts on the MySQL server in the given order using `root`. These scripts will create a schema `intellirndb`, a user `intellirnapp` with password `intellirnpassword`, create all necessary tables and load them with some dummy data.
-
-   1. [01_init.sql](sql/01_init.sql)
-   2. [02_dummy_data.sql](sql/02_dummy_data.sql)
+4. Run the script [db_setup.sql](sql/db_setup.sql) on your MySQL server using `root`. This script will create a schema `intellirndb`, a user `intellirnapp` with password `intellirnpassword`, create all necessary tables and load them with some dummy data.
 
 5. **To run the backend**
 
