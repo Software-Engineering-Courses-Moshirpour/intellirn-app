@@ -4,9 +4,15 @@ import { useFetch } from '../helpers/useFetch';
 import { getSurvey } from '../services/fakeSurveyServices';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+const url = '/api/survey?searchBy=surveyurl&searchTerm=';
 const HelpCard = () => {
+    const { id } = useParams();
+    let thisurl = url+id;
+    console.log(thisurl);
+    const { data } = useFetch(thisurl);
+    console.log(data);
     const [choices, setChoices] = useState([{
-        "nid": getSurvey()[0]["questions"][0]["id"], //essentially getting the topnode
+        "nid": data[0]["questionList"]["questionId"], //essentially getting the topnode
         "name":"Begin"
 
     }]);
@@ -15,17 +21,17 @@ const HelpCard = () => {
     const handleSelect =(e)=>{
         console.log(e.target.value);
         let newChoices = [];
-        for(var i = 0; i < getSurvey()[0]["questions"].length; i++)
+        for(var i = 0; i < data[0]["questionList"].length; i++)
         {
-            if(getSurvey()[0]["questions"][i]["id"]==e.target.value){
-                setContent(getSurvey()[0]["questions"][i]["content"])
+            if(data[0]["questionList"][i]["questionId"]==e.target.value){
+                setContent(data[0]["questionList"][i]["content"])
 
             }
 
-            if(getSurvey()[0]["questions"][i]["uid"]==e.target.value){
+            if(data[0]["questionList"][i]["uid"]==e.target.value){
                 newChoices.push({
-                    "nid": getSurvey()[0]["questions"][i]["id"], //essentially getting the topnode
-                    "name":getSurvey()[0]["questions"][i]["stem"]
+                    "nid": data[0]["questionList"][i]["questionId"], //essentially getting the topnode
+                    "name":data[0]["questionList"][i]["stem"]
                 })
 
             }

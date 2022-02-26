@@ -2,8 +2,9 @@ import React from 'react';
 import { useFetch } from '../helpers/useFetch';
 import { Link } from 'react-router-dom';
 import { getSurvey } from '../services/fakeSurveyServices';
-
+const url = '/api/survey';
 const ManageHelpList = () => {
+  const { data } = useFetch(url);
 
     return (
       <div className='row'>
@@ -25,23 +26,23 @@ const ManageHelpList = () => {
                     </tr>
                   </tfoot>
                   <tbody>
-                    {getSurvey()?.map((dataItem) => {
-                      let { name, linkCode} = dataItem;
-                      console.log("name: " + name);
+                    {data?.map((dataItem) => {
+                      let { title, surveyUrl} = dataItem;
+                      console.log("name: " + title);
 
 
                       return (
-                        <tr key={name}>
+                        <tr key={title}>
                           <td>
                             <Link
-                              to={`/managesurvey/${linkCode}`}
+                              to={`/managesurvey/${surveyUrl}`}
                               style={{
                                 display: 'block',
                                 width: '100%',
                                 color: 'inherit',
                               }}
                             >
-                              {name}
+                              {title}
                             </Link>
                           </td>
 
