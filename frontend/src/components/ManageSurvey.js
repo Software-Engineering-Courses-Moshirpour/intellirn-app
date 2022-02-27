@@ -1,12 +1,34 @@
 import React from 'react';
-import { useState } from 'react';
+
 import { getSurvey } from './../services/fakeSurveyServices';
+import { useFetch } from '../helpers/useFetch';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { deleteCall } from './../helpers/deleteCall';
+import { putCall } from './../helpers/putCall';
 
 const ManageSurvey = () => {
-  const [cart, setCart] = useState(getSurvey()[0]['questions']);
-  const [surveyname, setSurveyName] = useState(getSurvey()[0]['name']);
+  const url = '/api/survey?searchBy=surveyurl&searchTerm=';
+  const { id } = useParams();
+  let thisurl = url + id;
+  const { loading, data } = useFetch(thisurl);
+  const [cart, setCart] = useState([]);
+  //const [cart, setCart] = useState(getSurvey()[0]['questions']);
+  const [surveyname, setSurveyName] = useState("");
   const [cid, setCid] = useState(cart.length + 1);
   const [btnName, setBtnName] = useState('Add');
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('tryting to log some statement');
+    console.log(data);
+    if (data.length > 0) {
+      console.log('data detected');
+      setCart(data[0]['questionList']);
+      setSurveyName(data[0]['title'])
+
+    }
+  }, [!loading]);
 
   const [details, setDetails] = useState({
     id: '',
@@ -21,7 +43,7 @@ const ManageSurvey = () => {
 
     if (btnName != 'Update') {
       newCart.push({
-        id: cart.length + 1,
+        questionId: cart.length + 1,
         stem: details['stem'],
         content: details['content'],
         imageurl: details['imageurl'],
@@ -30,7 +52,7 @@ const ManageSurvey = () => {
       setCid(cart.length + 1);
     } else {
       for (var i = 0; i < newCart.length; i++) {
-        if (newCart[i]['id'] == cid) {
+        if (newCart[i]['questionId'] == cid) {
           console.log('update target found');
           newCart[i]['stem'] = details['stem'];
           newCart[i]['content'] = details['content'];
@@ -45,7 +67,7 @@ const ManageSurvey = () => {
     }
 
     setDetails({
-      id: '',
+      questionId: '',
       stem: '',
       content: '',
       imageurl: '',
@@ -57,23 +79,24 @@ const ManageSurvey = () => {
 
   function arrayRemove(arr, value) {
     return arr.filter(function (ele) {
-      return ele['id'] != value;
+      return ele['questionId'] != value;
     });
   }
 
   const handleUpdate = (e) => {
+    console.log("update clicked");
     let newCart = cart;
     let tempDetails = details;
     for (var i = 0; i < newCart.length; i++) {
       console.log(e.target.value);
 
-      if (newCart[i]['id'] == e.target.value) {
-        tempDetails['id'] = newCart[i]['id'];
+      if (newCart[i]['questionId'] == e.target.value) {
+        tempDetails['questionId'] = newCart[i]['questionId'];
         tempDetails['stem'] = newCart[i]['stem'];
         tempDetails['content'] = newCart[i]['content'];
         tempDetails['imageurl'] = newCart[i]['imageurl'];
         tempDetails['uid'] = newCart[i]['uid'];
-        setCid(tempDetails['id']);
+        setCid(tempDetails['questionId']);
         setDetails(tempDetails);
         setBtnName('Update');
       }
@@ -85,15 +108,15 @@ const ManageSurvey = () => {
     for (var i = 0; i < newCart.length; i++) {
       console.log(e.target.value);
 
-      if (newCart[i]['id'] == e.target.value) {
-        newCart = arrayRemove(newCart, newCart[i]['id']);
+      if (newCart[i]['questionId'] == e.target.value) {
+        newCart = arrayRemove(newCart, newCart[i]['questionId']);
       }
     }
 
     for (var i = 0; i < newCart.length; i++) {
       console.log(e.target.value);
 
-      newCart[i]['id'] = i + 1;
+      newCart[i]['questionId'] = i + 1;
     }
     setCart([...newCart]);
 
@@ -102,11 +125,40 @@ const ManageSurvey = () => {
   };
 
   const handleSubmit = (e) => {
+    console.log(surveyname);
+    let surveryURL = surveyname.replace(/\s+/g, '-').toLowerCase();
+    console.log(surveryURL);
+    let modUrl = '/api/survey/' + data[0]['surveyId'];
     console.log(cart);
+    let message = {
+      "surveyUrl": surveryURL,
+      "title": surveyname,
+      "description": "",
+      "imageUrl": "",
+      "questionList": cart
+    }
+
+    putCall(surveryURL, message).then((result) => {
+      window.alert(result['data']['message']);
+
+
+    });
+
   };
 
   const handleDeleteSurvey = (e) => {
-    console.log('Deletes this Survey');
+
+    let delUrl = '/api/survey/' + data[0]['surveyId'];
+    console.log('Deletes this Survey: ' + delUrl);
+    deleteCall(delUrl).then((result) => {
+      window.alert(result['data']['message']);
+
+      if (result['status'] == 200) {
+        let path = `/admin-menu`;
+        navigate(path);
+      }
+    });
+
   };
 
   return (
@@ -256,20 +308,20 @@ const ManageSurvey = () => {
                 </tfoot>
                 <tbody>
                   {cart.map((dataItem) => {
-                    let { id, stem, content, imageurl, uid } = dataItem;
+                    let { questionId, stem, content, imageurl, uid } = dataItem;
 
                     return (
-                      <tr key={id}>
-                        <td>{id}</td>
+                      <tr key={questionId}>
+                        <td>{questionId}</td>
                         <th>{content}</th>
                         <th>{uid}</th>
                         <td>
-                          <button onClick={(e) => handleUpdate(e)} value={id} className='btn btn-alert btn-sm'>
+                          <button onClick={(e) => handleUpdate(e)} value={questionId} className='btn btn-alert btn-sm'>
                             Edit
                           </button>
                         </td>
                         <td>
-                          <button onClick={(e) => handleDel(e)} value={id} className='btn btn-alert btn-sm'>
+                          <button onClick={(e) => handleDel(e)} value={questionId} className='btn btn-alert btn-sm'>
                             Delete
                           </button>
                         </td>
@@ -279,7 +331,7 @@ const ManageSurvey = () => {
                 </tbody>
               </table>
               <button onClick={(e) => handleSubmit(e)} className='btn btn-primary btn-md'>
-                Finish
+                Finish Update
               </button>
               <button onClick={(e) => handleDeleteSurvey(e)} className='btn btn-danger btn-md'>
                 Delete Survey
