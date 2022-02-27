@@ -7,57 +7,53 @@ const url = '/api/survey';
 const HelpList = () => {
   const { data } = useFetch(url);
 
-    return (
-      <div className='row'>
-        <div className='col-lg-10'>
-          <div className='card shadow mb-4'>
-            <div className='card-body'>
-              <div className='table-responsive'>
-                <table className='table table-bordered table-hover' id='dataTable' width='100%' cellSpacing='0'>
-                  <thead className='table-secondary text-dark'>
-                    <tr>
-                      <th>Survey</th>
+  return (
+    <div className='row'>
+      <div className='col-lg-10'>
+        <div className='card shadow mb-4'>
+          <div className='card-body'>
+            <div className='table-responsive'>
+              <table className='table table-bordered table-hover' id='dataTable' width='100%' cellSpacing='0'>
+                <thead className='table-secondary text-dark'>
+                  <tr>
+                    <th>Survey</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Survey</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  {data?.map((dataItem) => {
+                    let { title, surveyUrl } = dataItem;
+                    console.log('name: ' + title);
 
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Survey</th>
-
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    {data?.map((dataItem) => {
-                      let { title, surveyUrl} = dataItem;
-                      console.log("name: " + title);
-
-
-                      return (
-                        <tr key={title}>
-                          <td>
-                            <Link
-                              to={`/help/${surveyUrl}`}
-                              style={{
-                                display: 'block',
-                                width: '100%',
-                                color: 'inherit',
-                              }}
-                            >
-                              {title}
-                            </Link>
-                          </td>
-
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+                    return (
+                      <tr key={title}>
+                        <td>
+                          <Link
+                            to={`/survey/${surveyUrl}`}
+                            style={{
+                              display: 'block',
+                              width: '100%',
+                              color: 'inherit',
+                            }}
+                          >
+                            {title}
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
-  export default HelpList;
+export default HelpList;

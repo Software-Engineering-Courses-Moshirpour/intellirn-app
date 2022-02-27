@@ -23,7 +23,6 @@ const AdminMenuList = [
     url: '',
     src: '/images/menu_provide_extension.svg',
   },
-
 ];
 
 export default AdminMenuList;

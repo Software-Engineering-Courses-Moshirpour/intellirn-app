@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../helpers/useAuth';
-import profilePic from '../assets/img/undraw_profile_3.svg';
 
 const Header = (props) => {
   const { authed, logout } = useAuth();
@@ -21,25 +20,41 @@ const Header = (props) => {
   heading = heading || '';
 
   return (
-    <nav className='navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow'>
-      <button id='sidebarToggleTop' className='btn btn-link d-md-none rounded-circle mr-3'>
-        <i className='fa fa-bars'></i>
-      </button>
-      <h4
-        className='text-dark px-3 text-capitalize font-weight-bold o-hidden'
-        style={{
-          maxWidth: '70%',
-          textOverflow: 'ellipsis',
-          WebkitLineClamp: '1',
-          lineClamp: '1',
-          display: '-webkit-box',
-          WebkitBoxOrient: 'vertical',
-        }}
-      >
-        {heading}
-      </h4>
+    <header id='header' className='fixed-top'>
+      <div className='container d-flex align-items-center justify-content-between'>
+        <h1 className='logo'>
+          <Link to='/' href='index.html'>
+            IntelliRN
+          </Link>
+        </h1>
 
-    </nav>
+        <nav id='navbar' className='navbar'>
+          <ul>
+            <li>
+              <Link className='nav-link' to='/survey'>
+                Survey
+              </Link>
+            </li>
+            <li>
+              <Link className='nav-link' to='/education'>
+                Education
+              </Link>
+            </li>
+            <li>
+              <Link className='nav-link' to='/contact'>
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link className='getstarted' to='/login'>
+                Admin login
+              </Link>
+            </li>
+          </ul>
+          <i className='bi bi-list mobile-nav-toggle'></i>
+        </nav>
+      </div>
+    </header>
   );
 };
 

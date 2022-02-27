@@ -1,37 +1,40 @@
 import React from 'react';
-
-
-
-import { useEffect, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 import CreateSurvey from '../components/CreateSurvey';
-import Sidebar from './../components/Sidebar';
-import ScrollTop from './../components/ScrollTop';
-import Header from './../components/Header';
-import Footer from './../components/Footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const AddSurveyPage = () => {
-  const [psearchBy, setSearchBy] = useState(["",""]);
-  const [psearchTerm, setSearchTerm] = useState("");
   return (
     <React.Fragment>
-      <div id='wrapper'>
-        <Sidebar/>
+      <Header heading='Add Survey' />
 
-        <div id='content-wrapper' className='d-flex flex-column'>
-          <div id='content'>
-            <Header heading='Create Survey' />
-            <div className='container-fluid'>
-
-              <CreateSurvey />
+      <main id='main'>
+        <section className='breadcrumbs'>
+          <div className='container'>
+            <div className='d-flex justify-content-between align-items-center'>
+              <h6></h6>
+              <ol>
+                <li>
+                  <Link to='/'>Home</Link>
+                </li>
+                <li>
+                  <Link to='/survey'>Survey</Link>
+                </li>
+                <li>Add survey</li>
+              </ol>
             </div>
           </div>
+        </section>
 
-          <Footer />
-        </div>
-      </div>
+        <section className='inner-page'>
+          <div className='container'>
+            <CreateSurvey />
+          </div>
+        </section>
+      </main>
 
-      <ScrollTop />
+      <Footer />
     </React.Fragment>
   );
 };

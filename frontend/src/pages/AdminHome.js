@@ -1,31 +1,37 @@
 import React from 'react';
-
-import Sidebar from '../components/Sidebar';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import ScrollTop from '../components/ScrollTop';
-import Menu from '../components/Menu';
 import AdminMenu from '../components/AdminMenu';
 
 const AdminHome = () => {
   return (
     <React.Fragment>
-      <div id='wrapper'>
-        <Sidebar />
+      <Header heading='Admin menu' />
 
-        <div id='content-wrapper' className='d-flex flex-column'>
-          <div id='content'>
-            <Header heading='Home' />
-            <div className='container-fluid'>
-              <AdminMenu />
+      <main id='main'>
+        <section className='breadcrumbs'>
+          <div className='container'>
+            <div className='d-flex justify-content-between align-items-center'>
+              <h6></h6>
+              <ol>
+                <li>
+                  <Link to='/'>Home</Link>
+                </li>
+                <li>Admin menu</li>
+              </ol>
             </div>
           </div>
+        </section>
 
-          <Footer />
-        </div>
-      </div>
+        <section className='inner-page'>
+          <div className='container'>
+            <AdminMenu />
+          </div>
+        </section>
+      </main>
 
-      <ScrollTop />
+      <Footer />
     </React.Fragment>
   );
 };
