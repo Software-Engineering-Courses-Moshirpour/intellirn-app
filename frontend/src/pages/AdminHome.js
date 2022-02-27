@@ -7,13 +7,13 @@ import AdminMenu from '../components/AdminMenu';
 const AdminHome = () => {
   return (
     <React.Fragment>
-      <Header heading='Admin menu' />
+      <Header />
 
       <main id='main'>
         <section className='breadcrumbs'>
           <div className='container'>
             <div className='d-flex justify-content-between align-items-center'>
-              <h6></h6>
+              <h4 style={{ visibility: 'hidden' }}>heading not to be displayed</h4>
               <ol>
                 <li>
                   <Link to='/'>Home</Link>

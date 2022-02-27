@@ -1,16 +1,12 @@
 import React from 'react';
-import { useFetch } from '../helpers/useFetch';
-import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { postCall } from '../helpers/postCall';
 
 const url = '/api/survey';
 const CreateSurvey = () => {
   const [cart, setCart] = useState([]);
   const [surveyname, setSurveyName] = useState('');
-
   const [cid, setCid] = useState(cart.length + 1);
-
   const [btnName, setBtnName] = useState('Add');
 
   const [details, setDetails] = useState({

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFetch } from '../helpers/useFetch';
-import { getSurvey } from '../services/fakeSurveyServices';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const HelpCard = () => {
@@ -23,31 +22,24 @@ const HelpCard = () => {
   //   },
   // ]);
 
-
   useEffect(() => {
-    console.log("tryting to log some statement");
+    console.log('tryting to log some statement');
     console.log(data);
-    if(data.length>0){
-      console.log("data detected");
+    if (data.length > 0) {
+      console.log('data detected');
       setChoices([
         {
           nid: data[0]['questionList'][0]['questionId'], //essentially getting the topnode
           name: 'Begin',
         },
       ]);
-      console.log("Choices length: " + choices.length);
-
+      console.log('Choices length: ' + choices.length);
     }
-
-
-
   }, [!loading]);
-
-
 
   const handleSelect = (e) => {
     console.log(e.target.value);
-    console.log("Choices length: " + choices[0]["nid"]);
+    console.log('Choices length: ' + choices[0]['nid']);
     let newChoices = [];
     for (var i = 0; i < data[0]['questionList'].length; i++) {
       if (data[0]['questionList'][i]['questionId'] == e.target.value) {

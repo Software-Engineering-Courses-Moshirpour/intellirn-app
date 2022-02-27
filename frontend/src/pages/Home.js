@@ -1,42 +1,41 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
     <React.Fragment>
-      <Header heading='Home' />
+      <Header />
 
-      <section id='hero' class='d-flex align-items-center'>
-        <div class='container'>
-          <div class='row'>
-            <div class='col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center'>
+      <section id='hero' className='d-flex align-items-center'>
+        <div className='container'>
+          <div className='row'>
+            <div className='col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center'>
               <h1>Providing solutions to your HPTP needs</h1>
               <h2>We are team of talented registered nurses who care for you</h2>
             </div>
-            <div class='col-lg-6 order-1 order-lg-2 hero-img'>
-              <img src={`${process.env.PUBLIC_URL + '/images/vaccination.svg'}`} class='img-fluid animated' alt='' />
+            <div className='col-lg-6 order-1 order-lg-2 hero-img'>
+              <img src={`${process.env.PUBLIC_URL + '/images/vaccination.svg'}`} className='img-fluid animated' alt='' />
             </div>
           </div>
         </div>
       </section>
 
       <main id='main'>
-        <section id='services' class='services section-bg'>
-          <div class='container'>
-            <div class='section-title'>
+        <section id='services' className='services section-bg'>
+          <div className='container'>
+            <div className='section-title'>
               <span>Services</span>
               <h2>Services</h2>
               <p>Check out online services provided by us</p>
             </div>
 
-            <div class='row'>
-              <div class='col-lg-4 col-md-6'>
-                <div class='icon-box'>
-                  <div class='icon'>
-                    <i class='bx bx-file'></i>
+            <div className='row'>
+              <div className='col-lg-4 col-md-6'>
+                <div className='icon-box'>
+                  <div className='icon'>
+                    <i className='bx bx-file'></i>
                   </div>
                   <h4>
                     <Link to='/survey'>Survey</Link>
@@ -45,10 +44,10 @@ const Home = () => {
                 </div>
               </div>
 
-              <div class='col-lg-4 col-md-6 mt-4 mt-md-0'>
-                <div class='icon-box'>
-                  <div class='icon'>
-                    <i class='bx bx-slideshow'></i>
+              <div className='col-lg-4 col-md-6 mt-4 mt-md-0'>
+                <div className='icon-box'>
+                  <div className='icon'>
+                    <i className='bx bx-slideshow'></i>
                   </div>
                   <h4>
                     <Link to='/education'>Education</Link>
@@ -57,10 +56,10 @@ const Home = () => {
                 </div>
               </div>
 
-              <div class='col-lg-4 mt-4 mt-lg-0'>
-                <div class='icon-box'>
-                  <div class='icon'>
-                    <i class='bx bx-world'></i>
+              <div className='col-lg-4 mt-4 mt-lg-0'>
+                <div className='icon-box'>
+                  <div className='icon'>
+                    <i className='bx bx-world'></i>
                   </div>
                   <h4>
                     <Link to='/contact'>Contact</Link>

@@ -2,18 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import HelpList from '../components/HelpList';
+import SurveyList from '../components/SurveyList';
 
 const Survey = () => {
   return (
     <React.Fragment>
-      <Header heading='Please Select the Help Items Below' />
+      <Header />
 
       <main id='main'>
         <section className='breadcrumbs'>
           <div className='container'>
             <div className='d-flex justify-content-between align-items-center'>
-              <h6></h6>
+              <h4 style={{ visibility: 'hidden' }}>heading not to be displayed</h4>
               <ol>
                 <li>
                   <Link to='/'>Home</Link>
@@ -26,7 +26,7 @@ const Survey = () => {
 
         <section className='inner-page'>
           <div className='container'>
-            <HelpList />
+            <SurveyList />
           </div>
         </section>
       </main>

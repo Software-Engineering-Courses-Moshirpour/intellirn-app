@@ -1,27 +1,27 @@
 const AdminMenuList = [
   {
     id: 1,
-    head: 'Create New Survey',
-    url: '/create-survey',
-    src: '/images/menu_dashboard.svg',
+    head: 'Create new survey',
+    url: '/admin-menu/survey/create-survey',
+    src: '/images/eye_test.svg',
   },
   {
     id: 2,
-    head: 'Manage Surveys',
-    url: '/managesurvey',
-    src: '/images/menu_borrow_books.svg',
+    head: 'Edit existing surveys',
+    url: '/admin-menu/survey/edit-survey',
+    src: '/images/healthy_man_donating_his_blood.svg',
   },
   {
     id: 3,
-    head: 'Create New Education Playlist',
-    url: '',
-    src: '/images/menu_return_books.svg',
+    head: 'Create new education',
+    url: '/admin-menu/education/create-education',
+    src: '/images/research_lab.svg',
   },
   {
     id: 4,
-    head: 'Manage Education Playlist',
-    url: '',
-    src: '/images/menu_provide_extension.svg',
+    head: 'Edit existing educations',
+    url: '/admin-menu/education/edit-education',
+    src: '/images/routine_health_checkup.svg',
   },
 ];
 

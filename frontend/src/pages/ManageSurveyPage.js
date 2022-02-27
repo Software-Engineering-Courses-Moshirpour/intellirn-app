@@ -7,16 +7,19 @@ import ManageSurvey from './../components/ManageSurvey';
 const ManageSurveyPage = () => {
   return (
     <React.Fragment>
-      <Header heading='Update Survey' />
+      <Header />
 
       <main id='main'>
         <section className='breadcrumbs'>
           <div className='container'>
             <div className='d-flex justify-content-between align-items-center'>
-              <h6></h6>
+              <h4 style={{ visibility: 'hidden' }}>heading not to be displayed</h4>
               <ol>
                 <li>
                   <Link to='/'>Home</Link>
+                </li>
+                <li>
+                  <Link to='/admin-menu'>Admin menu</Link>
                 </li>
                 <li>Manage survey</li>
               </ol>

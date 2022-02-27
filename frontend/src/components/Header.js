@@ -46,8 +46,8 @@ const Header = (props) => {
               </Link>
             </li>
             <li>
-              <Link className='getstarted' to='/login'>
-                Admin login
+              <Link className='getstarted' to='/admin-menu'>
+                Admin menu
               </Link>
             </li>
           </ul>

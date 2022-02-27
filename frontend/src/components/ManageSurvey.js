@@ -1,16 +1,11 @@
 import React from 'react';
-import { useFetch } from '../helpers/useFetch';
-import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { postCall } from '../helpers/postCall';
+import { useState } from 'react';
 import { getSurvey } from './../services/fakeSurveyServices';
 
 const ManageSurvey = () => {
   const [cart, setCart] = useState(getSurvey()[0]['questions']);
   const [surveyname, setSurveyName] = useState(getSurvey()[0]['name']);
-
   const [cid, setCid] = useState(cart.length + 1);
-
   const [btnName, setBtnName] = useState('Add');
 
   const [details, setDetails] = useState({
@@ -283,10 +278,10 @@ const ManageSurvey = () => {
                   })}
                 </tbody>
               </table>
-              <button onClick={(e) => handleSubmit(e)} className='btn btn-primary btn-lg'>
+              <button onClick={(e) => handleSubmit(e)} className='btn btn-primary btn-md'>
                 Finish
               </button>
-              <button onClick={(e) => handleDeleteSurvey(e)} className='btn btn-danger btn-lg'>
+              <button onClick={(e) => handleDeleteSurvey(e)} className='btn btn-danger btn-md'>
                 Delete Survey
               </button>
             </div>
