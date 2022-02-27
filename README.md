@@ -65,3 +65,8 @@ Follow the steps to run the application on your local machine
 - [Marko Mijovic](https://github.com/markomijovic)
 - [Michael Ah Kiow](https://github.com/micdean19)
 - [Michael Man Yin Lee](https://github.com/mikeePy)
+
+## Attribution
+
+1. Bootstrap eNno theme used to style the interface, downloaded from [here](https://bootstrapmade.com/).
+2. Nurse logo used as favicon, created by Icon Pond, downloaded from [here](https://www.flaticon.com/free-icons/nurse).
