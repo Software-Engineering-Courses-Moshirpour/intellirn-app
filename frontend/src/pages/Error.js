@@ -27,12 +27,17 @@ const Error = () => {
 
         <section className='inner-page'>
           <div className='container'>
-            <div className='container container-fluid align-items-center'>
-              <img className='img-fluid' src={process.env.PUBLIC_URL + notFoundPic} alt='404' style={{ maxHeight: '400px' }} />
+            <div className='container-fluid m-0 p-0'>
+              <div className='text-center'>
+                <div className='container container-fluid p-0'>
+                  <img className='img-fluid' src={process.env.PUBLIC_URL + notFoundPic} alt='404' style={{ maxHeight: '500px' }} />
+                </div>
+                {/* <p className='lead text-gray-800 mb-5'>Page not found</p> */}
+                <Link to='/' className='btn btn-primary btn-icon-split m-5'>
+                  <span className='text'>Back to home</span>
+                </Link>
+              </div>
             </div>
-            <Link to='/' className='btn btn-primary btn-icon-split m-5'>
-              <span className='text'>Back to home</span>
-            </Link>
           </div>
         </section>
       </main>
