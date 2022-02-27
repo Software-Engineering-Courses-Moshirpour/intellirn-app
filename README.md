@@ -1,10 +1,32 @@
 # IntelliRN
 
-A project with Faculty of Nursing | University of Calgary
+A project in collaboration with Faculty of Nursing, University of Calgary
 
-## How to run backend and frontend
+## About
 
-Below are steps to run the application
+This is a project in collaboration with Nursing 654 students, Faculty of Nursing, University of Calgary. It aims to build a prototype that can help RNs manage an easy to web portal, using which they can create surveys/questionnaire and educational articles for their clients without any coding.
+
+The prototype is deployed on the cloud and is accessible at [https://intellirn.ml](https://intellirn.ml/).
+
+## Source code structure
+
+![dir tree](documents/directory_tree.png)
+
+- [`backend`](backend) - contains Spring Boot backend source code
+- [`documents`](documents) - various documentation on the project
+- [`frontend`](frontend) - contains React frontend source code
+- [`sql`](sql) - contains MySQL database setup script
+
+## Dependencies
+
+- JDK version 11.0.11 or above
+- Maven version 3.6.3 or above
+- MySQL server version 8.0.26 or above
+- Node version 8.1 or above
+
+## Running it locally
+
+Follow the steps to run the application on your local machine
 
 1. Clone the repository to your local machine.
 
@@ -26,7 +48,7 @@ Below are steps to run the application
 
    3. Import [this](documents/IntelliRN.postman_collection.json) file into the Postman. You can then run all the API endpoints in the imported folder **IntelliRN** one by one.
 
-   4. At any given time, you can also verify the db tables using the credentials mentioned in step #4.
+   4. At any given time, you can also verify the database tables using the credentials mentioned in step #4.
 
 6. **To run the frontend**
 
