@@ -1,11 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { getSurvey } from '../services/fakeSurveyServices';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useFetch } from '../helpers/useFetch';
 import HealthCard from '../components/HealthCard';
 
 const SurveyDetails = () => {
+  const { id } = useParams();
+  let thisurl = `/api/survey?searchBy=surveyurl&searchTerm=${id}`;
+
+  const { loading, data } = useFetch(thisurl);
+  const [details, setDetails] = useState({});
+
+  useEffect(() => {
+    if (data.length === 1) {
+      setDetails(data[0]);
+    }
+  }, [loading]);
+
   return (
     <React.Fragment>
       <Header />
@@ -22,7 +34,7 @@ const SurveyDetails = () => {
                 <li>
                   <Link to='/survey'>Survey</Link>
                 </li>
-                <li>{getSurvey()[0]['name']}</li>
+                <li>{details['title']}</li>
               </ol>
             </div>
           </div>
@@ -30,6 +42,7 @@ const SurveyDetails = () => {
 
         <section className='inner-page'>
           <div className='container'>
+            <h3 className='pb-5'>Survey on {details['title']}</h3>
             <HealthCard />
           </div>
         </section>

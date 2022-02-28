@@ -26,6 +26,7 @@ const Survey = () => {
 
         <section className='inner-page'>
           <div className='container'>
+            <h3 className='pb-5'>Select a survey from the list to get started</h3>
             <SurveyList />
           </div>
         </section>
