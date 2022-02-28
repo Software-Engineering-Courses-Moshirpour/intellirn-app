@@ -4,7 +4,7 @@ A project in collaboration with Faculty of Nursing, University of Calgary
 
 ## About
 
-This is a project in collaboration with Nursing 654 students, Faculty of Nursing, University of Calgary. It aims to build a prototype that can help RNs manage an easy to use web portal, using which they can create surveys/questionnaires and educational articles for their clients or general public without any coding.
+This is a project in collaboration with Nursing 654 students, Faculty of Nursing, University of Calgary. It aims to build a prototype that can help RNs manage an easy to use web portal, using which they can create surveys/questionnaires and educational articles for their clients or for general public without any technical skills.
 
 The prototype is deployed on the cloud and is accessible at [https://intellirn.ml](https://intellirn.ml/).
 
@@ -22,7 +22,7 @@ The prototype is deployed on the cloud and is accessible at [https://intellirn.m
 - JDK version 11.0.11 or above
 - Maven version 3.6.3 or above
 - MySQL server version 8.0.26 or above
-- Node version 8.1 or above
+- Node version 16.13.1 or above
 
 ## Running it locally
 
