@@ -14,12 +14,13 @@ const ManageSurveyList = () => {
             <th>ID</th>
             <th>URL</th>
             <th>Title</th>
+            <th>Created</th>
             <th>Last updated</th>
           </tr>
         </thead>
         <tbody>
           {data?.map((dataItem) => {
-            let { surveyId, surveyUrl, title, lastUpdateDate } = dataItem;
+            let { surveyId, surveyUrl, title, creationDate, lastUpdateDate } = dataItem;
 
             return (
               <tr key={surveyId}>
@@ -57,6 +58,18 @@ const ManageSurveyList = () => {
                     }}
                   >
                     {title}
+                  </Link>
+                </td>
+                <td>
+                  <Link
+                    to={`/admin-menu/survey/edit-survey/${surveyUrl}`}
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      color: 'inherit',
+                    }}
+                  >
+                    {creationDate}
                   </Link>
                 </td>
                 <td>
