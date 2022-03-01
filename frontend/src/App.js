@@ -7,6 +7,7 @@ import SurveyDetails from './pages/SurveyDetails';
 import EditSurvey from './pages/EditSurvey';
 import ManageSurveyPage from './pages/ManageSurveyPage';
 import Error from './pages/Error';
+import ContactUs from './pages/ContactUs';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/contactus' element={<ContactUs />} />
         <Route path='/survey' element={<Survey />} />
         <Route path='/survey/:id' element={<SurveyDetails />} />
         {/* <Route path='/education' element={<Education />} />

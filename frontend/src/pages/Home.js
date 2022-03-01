@@ -62,7 +62,7 @@ const Home = () => {
                     <i className='bx bx-world'></i>
                   </div>
                   <h4>
-                    <Link to='/contact'>Contact</Link>
+                    <Link to='/contactus'>Contact us</Link>
                   </h4>
                   <p>Are you still in doubt? Then please don't hesitate to contact us</p>
                 </div>
