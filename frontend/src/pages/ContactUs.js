@@ -74,7 +74,7 @@ const Contact = () => {
               </div>
 
               <div className='col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch'>
-                <form onSubmit={handleSubmit} role='form' className='php-email-form' id='contactform'>
+                <form onSubmit={handleSubmit} className='php-email-form' id='contactform'>
                   <div className='row'>
                     <div className='form-group col-md-6'>
                       <label htmlFor='name'>Your Name</label>

@@ -1,24 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../helpers/useAuth';
 
-const Header = (props) => {
-  const { authed, logout } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    // calls api to verify login, stores jwt tokens here
-
-    // carry on if successful
-    logout().then(() => {
-      navigate('/');
-    });
-  };
-
-  let { heading } = props;
-  heading = heading || '';
-
+const Header = () => {
   return (
     <header id='header' className='fixed-top'>
       <div className='container d-flex align-items-center justify-content-between'>

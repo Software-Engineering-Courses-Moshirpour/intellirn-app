@@ -25,7 +25,7 @@ const Footer = () => {
         </div>
         <div className='credits'>
           Made possible by <b>eNno</b> template from{' '}
-          <a href='https://bootstrapmade.com/' target={'_blank'}>
+          <a href='https://bootstrapmade.com/' target='_blank' rel='noopener noreferrer'>
             BootstrapMade
           </a>
         </div>

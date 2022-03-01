@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { getSurvey } from './../services/fakeSurveyServices';
 import { useFetch } from '../helpers/useFetch';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -13,8 +11,7 @@ const ManageSurvey = () => {
   let thisurl = url + id;
   const { loading, data } = useFetch(thisurl);
   const [cart, setCart] = useState([]);
-  //const [cart, setCart] = useState(getSurvey()[0]['questions']);
-  const [surveyname, setSurveyName] = useState("");
+  const [surveyname, setSurveyName] = useState('');
   const [cid, setCid] = useState(cart.length + 1);
   const [btnName, setBtnName] = useState('Add');
   let navigate = useNavigate();
@@ -25,8 +22,7 @@ const ManageSurvey = () => {
     if (data.length > 0) {
       console.log('data detected');
       setCart(data[0]['questionList']);
-      setSurveyName(data[0]['title'])
-
+      setSurveyName(data[0]['title']);
     }
   }, [!loading]);
 
@@ -84,7 +80,7 @@ const ManageSurvey = () => {
   }
 
   const handleUpdate = (e) => {
-    console.log("update clicked");
+    console.log('update clicked');
     let newCart = cart;
     let tempDetails = details;
     for (var i = 0; i < newCart.length; i++) {
@@ -131,23 +127,19 @@ const ManageSurvey = () => {
     let modUrl = '/api/survey/' + data[0]['surveyId'];
     console.log(cart);
     let message = {
-      "surveyUrl": surveryURL,
-      "title": surveyname,
-      "description": "",
-      "imageUrl": "",
-      "questionList": cart
-    }
+      surveyUrl: surveryURL,
+      title: surveyname,
+      description: '',
+      imageUrl: '',
+      questionList: cart,
+    };
 
     putCall(surveryURL, message).then((result) => {
       window.alert(result['data']['message']);
-
-
     });
-
   };
 
   const handleDeleteSurvey = (e) => {
-
     let delUrl = '/api/survey/' + data[0]['surveyId'];
     console.log('Deletes this Survey: ' + delUrl);
     deleteCall(delUrl).then((result) => {
@@ -158,7 +150,6 @@ const ManageSurvey = () => {
         navigate(path);
       }
     });
-
   };
 
   return (

@@ -1,3 +1,3 @@
-const hosting = 'http://localhost:8080';
+const hosting = 'https://localhost:8080';
 
 export default hosting;

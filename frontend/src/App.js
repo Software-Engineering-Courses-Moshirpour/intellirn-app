@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AddSurvey from './pages/AddSurvey';
 import Home from './pages/Home';
 import AdminHome from './pages/AdminHome';
