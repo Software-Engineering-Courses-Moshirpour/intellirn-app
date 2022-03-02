@@ -2,6 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+  function handleClick(e) {
+    console.log('Am i getting clicked?');
+    document.getElementById('navbar').classList.toggle('navbar-mobile');
+    document.getElementById('mobile-menu-button').classList.toggle('bi-list');
+    document.getElementById('mobile-menu-button').classList.toggle('bi-x');
+  }
+
   return (
     <header id='header' className='fixed-top'>
       <div className='container d-flex align-items-center justify-content-between'>
@@ -34,7 +41,7 @@ const Header = () => {
               </Link>
             </li>
           </ul>
-          <i className='bi bi-list mobile-nav-toggle'></i>
+          <i id='mobile-menu-button' className='bi bi-list mobile-nav-toggle' onClick={handleClick}></i>
         </nav>
       </div>
     </header>
