@@ -51,6 +51,17 @@ CREATE TABLE admin (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE contact_us (
+   id BIGINT NOT NULL AUTO_INCREMENT,
+   name VARCHAR(255),
+   email VARCHAR(255),
+   subject VARCHAR(255),
+   message mediumtext,
+   time_received DATETIME(6),
+   is_read bit(1),
+   PRIMARY KEY (id)
+ );
+
 INSERT INTO survey (survey_url,title,description,image_url,creation_date,last_update_date) VALUES
 ("allergic-reaction","Allergic Reaction","Take a survey for allergic reaction","https://image.shutterstock.com/z/stock-vector-girl-with-allergies-vector-flat-illustration-400504429.jpg","2022-02-21","2022-02-21");
 
@@ -80,3 +91,6 @@ Diam quis enim lobortis scelerisque fermentum dui. Dui sapien eget mi proin sed 
 INSERT INTO admin (first_name,middle_name,last_name,email,password) VALUES
 ("Erin",NULL,"Bugbee","epbugbee@gmail.com","erin.bugbee"),
 ("Suzanne",NULL,"Burgman","suzburgman@gmail.com","suzanne.burgman");
+
+INSERT INTO contact_us (name,email,subject,message,time_received,is_read) VALUES
+("John Doe","john.doe@gmail.com","Swelling at IV site","I have gotten swelling at my IV site. Please help!!!","2022-02-23 00:00:00","0");

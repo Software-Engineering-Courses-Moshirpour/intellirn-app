@@ -304,6 +304,98 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "ContactUs",
+			"item": [
+				{
+					"name": "Get contactus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/contactus",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contactus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get contact by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/contactus/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contactus",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add contactus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Barry Allen\",\r\n    \"email\": \"barry.allen@cw.com\",\r\n    \"subject\": \"Pain in legs\",\r\n    \"message\": \"I was running too fast, now I have cramps in my legs. Please help me at earliest.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/contactus",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contactus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete contactus",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/contactus/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contactus",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
