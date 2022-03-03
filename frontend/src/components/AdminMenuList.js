@@ -23,6 +23,12 @@ const AdminMenuList = [
     url: '/admin-menu/education/edit-education',
     src: '/images/routine_health_checkup.svg',
   },
+  {
+    id: 5,
+    head: 'View received messages',
+    url: '/admin-menu/contactus',
+    src: '/images/doctor_checking_pregnant_lady.svg',
+  },
 ];
 
 export default AdminMenuList;
