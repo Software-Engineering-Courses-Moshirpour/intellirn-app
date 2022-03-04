@@ -27,4 +27,16 @@ public class AdminService implements UserDetailsService {
 
         return null;
     }
+
+    public Admin getAdminByEmail(String email) {
+        List<Admin> allAdmins = this.adminRepository.findAll();
+
+        for (Admin eachAdmin : allAdmins) {
+            if (eachAdmin.getEmail().equalsIgnoreCase(email)) {
+                return eachAdmin;
+            }
+        }
+
+        return null;
+    }
 }

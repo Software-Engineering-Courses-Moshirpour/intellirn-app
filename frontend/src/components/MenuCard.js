@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 const MenuCard = ({ id, head, url, src }) => {
   return (
-    <div className='col-xl-6 col-lg-5'>
+    <div className='col-xl-4 col-lg-4'>
       <Link to={url} style={{ textDecoration: 'none' }}>
         <div className='card shadow mx-4 my-4'>
           <div className='card-header py-3'>
-            <h6 className='m-0 font-weight-bold text-primary'>{head}</h6>
+            <h6 className='m-0 font-weight-bold text-success'>{head}</h6>
           </div>
 
           <div className='card-body p-0'>
@@ -19,7 +19,7 @@ const MenuCard = ({ id, head, url, src }) => {
                 backgroundPosition: 'center',
               }}
             >
-              <div className='pt-0' style={{ height: '350px' }}></div>
+              <div className='pt-0' style={{ height: '300px' }}></div>
             </div>
           </div>
         </div>
