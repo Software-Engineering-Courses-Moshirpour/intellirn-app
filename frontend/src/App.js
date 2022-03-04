@@ -9,6 +9,7 @@ import ManageSurveyPage from './pages/ManageSurveyPage';
 import ContactUs from './pages/ContactUs';
 import ViewAllContactUs from './pages/ViewAllContactUs';
 import ContactUsDetails from './pages/ContactUsDetails';
+import AddEducation from './pages/AddEducation';
 import Error from './pages/Error';
 
 function App() {
@@ -26,8 +27,8 @@ function App() {
         <Route path='/admin-menu/survey/create-survey' element={<AddSurvey />} />
         <Route path='/admin-menu/survey/edit-survey' element={<EditSurvey />} />
         <Route path='/admin-menu/survey/edit-survey/:id' element={<ManageSurveyPage />} />
-        {/* <Route path='/admin-menu/education/create-education' element={<AddEducation />} />
-        <Route path='/admin-menu/education/edit-education' element={<EditEducation />} />
+        <Route path='/admin-menu/education/create-education' element={<AddEducation />} />
+        {/*<Route path='/admin-menu/education/edit-education' element={<EditEducation />} />
         <Route path='/admin-menu/education/edit-education/:id' element={<EditEdicationDetails />} /> */}
         <Route path='/admin-menu/contactus' element={<ViewAllContactUs />} />
         <Route path='/admin-menu/contactus/:id' element={<ContactUsDetails />} />
