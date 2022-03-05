@@ -4,23 +4,38 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import EditEducationDetails from "../components/EditEducationDetails";
 import { useState } from "react";
-import { getCall } from "../helpers/getCall";
+import useDidMountEffect from "../helpers/customHook";
+import { useFetch } from "../helpers/useFetch";
 
 function EditEducation(props) {
     const [educations, setEducations] = useState([]);
-
-    const onSubmit = async (e) => {
+    const [searched, setSearch] = useState(false);
+    const [category, setCategory] = useState("");
+    const Submit = (e) => {
         e.preventDefault();
-        const url = "api/education";
-        const message = {
-            searchBy: "title",
-            searchTerm: e.target.elements[0].value,
-        };
-        const [status, data] = getCall(url, message);
-        if (status === 200) {
-            setEducations(data);
-        }
+        const url = `api/education?searchBy=categoryname&searchTerm=${category}`;
+
+        // const [status, data] = useFetch(url);
+        // if (status === 200) {
+        //     setEducations(data);
+        // }
+        const mock = [
+            { title: "title1", url: "url1", type: "Link", route: "/title1" },
+            {
+                title: "title2",
+                url: "url2",
+                type: "YouTube",
+                route: "/customroute2",
+            },
+        ];
+        console.log("in search button");
+        setEducations(mock);
     };
+
+    useDidMountEffect(() => {
+        setSearch(true);
+        console.log("in usemounteffect");
+    }, [educations]);
 
     return (
         <React.Fragment>
@@ -47,13 +62,16 @@ function EditEducation(props) {
                 </section>
                 <section className="inner-page">
                     <div className="container justify-content-center text-center">
-                        <form onSubmit={onSubmit}>
+                        <form onSubmit={Submit}>
                             <div className="form-group mb-2">
-                                <label className="sr-only">Topic</label>
+                                <label className="sr-only">Category</label>
                                 <input
                                     type="text"
                                     className="form-control"
                                     placeholder="Search by education topic"
+                                    onChange={(e) =>
+                                        setCategory(e.target.value)
+                                    }
                                     required
                                 />
                             </div>
@@ -63,14 +81,13 @@ function EditEducation(props) {
                             >
                                 Search
                             </button>
-                            {educations.map((education, index) => {
-                                return (
-                                    <EditEducationDetails
-                                        education={education}
-                                    />
-                                );
-                            })}
                         </form>
+                        {searched && (
+                            <EditEducationDetails
+                                educations={educations}
+                                category={category}
+                            />
+                        )}
                     </div>
                 </section>
             </main>

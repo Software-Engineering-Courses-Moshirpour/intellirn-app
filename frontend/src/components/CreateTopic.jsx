@@ -5,12 +5,21 @@ function EdForm(props) {
         <div className="container">
             <div className="row">
                 <div className="col-md-4">
-                    <label>Topic</label>
+                    <label>Category</label>
                     <input
                         type="text"
                         className="form-control mb-2"
-                        placeholder="Topic Name"
+                        placeholder="Category Name"
                         onChange={(newTopic) => props.setTopic(newTopic)}
+                    />
+                </div>
+                <div className="col-md-3">
+                    <label>Route</label>
+                    <input
+                        type="text"
+                        className="form-control mb-2"
+                        placeholder="Optional custom route"
+                        onChange={(newRoute) => props.setRoute(newRoute)}
                     />
                 </div>
             </div>

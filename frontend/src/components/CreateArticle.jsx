@@ -16,7 +16,7 @@ function Article(props) {
                     <input
                         type="text"
                         class="form-control"
-                        placeholder="Article Title"
+                        placeholder="Education Title"
                         onInput={(e) => update(e.target.value, "title")}
                     />
                 </div>

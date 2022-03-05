@@ -12,6 +12,7 @@ function AddEducation(props) {
     const [content, setContent] = useState([]);
     const [articles, setArticles] = useState([]);
     const [topic, setTopic] = useState("");
+    const [route, setRoute] = useState("");
     const onAddBtnClick = (event) => {
         setContent(
             content.concat({
@@ -37,10 +38,10 @@ function AddEducation(props) {
     }, [content.length]);
 
     const onSubmit = (event) => {
-        console.log(content);
         const url = "api/education";
         const message = {
             title: topic,
+            route: route,
             articles: content,
         };
 
@@ -48,6 +49,7 @@ function AddEducation(props) {
             window.alert(result["data"]["message"]);
             if (result["status"] === 200) {
                 setTopic("");
+                setRoute("");
                 setArticles([]);
             }
         });
@@ -84,18 +86,17 @@ function AddEducation(props) {
                             onClick={onAddBtnClick}
                             className="btn btn-primary ml-2"
                         >
-                            Add Article
+                            Add Education
                         </button>
                         {articles}
-                        {articles.length > 0 && (
-                            <button
-                                type="submit"
-                                onClick={onSubmit}
-                                className="btn btn-danger ml-2"
-                            >
-                                Complete
-                            </button>
-                        )}
+
+                        <button
+                            type="submit"
+                            onClick={onSubmit}
+                            className="btn btn-danger ml-2"
+                        >
+                            Complete
+                        </button>
                     </div>
                 </section>
             </main>
