@@ -6,6 +6,8 @@ const url = '/api/survey';
 const CreateSurvey = () => {
   const [cart, setCart] = useState([]);
   const [surveyname, setSurveyName] = useState('');
+  const [description, setDescription] = useState('');
+  const [imgurl, setImgurl] = useState('');
   const [cid, setCid] = useState(cart.length + 1);
   const [btnName, setBtnName] = useState('Add');
 
@@ -111,8 +113,8 @@ const CreateSurvey = () => {
     let message = {
       surveyUrl: surveryURL,
       title: surveyname,
-      description: '',
-      imageUrl: '',
+      description: description,
+      imageUrl: imgurl,
       questionList: cart,
     };
 
@@ -128,8 +130,12 @@ const CreateSurvey = () => {
           nextUrl: '',
           uid: '',
         });
+        setSurveyName("");
+        setDescription("");
+        setImgurl("");
       }
     });
+
   };
 
   return (
@@ -251,6 +257,36 @@ const CreateSurvey = () => {
               value={surveyname}
               onChange={(e) => {
                 setSurveyName(e.target.value);
+              }}
+            />
+            <hr></hr>
+            <h4>Description</h4>
+
+            <input
+              type='text'
+              className='form-control'
+              id='formImgUrl'
+              name='formImgUrl'
+              placeholder=''
+              maxLength='250'
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            />
+            <hr></hr>
+            <h4>Image Url</h4>
+
+            <input
+              type='text'
+              className='form-control'
+              id='formImgUrl'
+              name='formImgUrl'
+              placeholder=''
+              maxLength='250'
+              value={imgurl}
+              onChange={(e) => {
+                setImgurl(e.target.value);
               }}
             />
             <hr></hr>

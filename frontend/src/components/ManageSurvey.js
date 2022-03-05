@@ -8,6 +8,8 @@ import { putCall } from './../helpers/putCall';
 const ManageSurvey = () => {
   const url = '/api/survey?searchBy=surveyurl&searchTerm=';
   const { id } = useParams();
+  const [description, setDescription] = useState('');
+  const [imgurl, setImgurl] = useState('');
   let thisurl = url + id;
   const { loading, data } = useFetch(thisurl);
   const [cart, setCart] = useState([]);
@@ -23,6 +25,8 @@ const ManageSurvey = () => {
       console.log('data detected');
       setCart(data[0]['questionList']);
       setSurveyName(data[0]['title']);
+      setDescription(data[0]['description']);
+      setImgurl(data[0]['imageUrl']);
     }
   }, [!loading]);
 
@@ -129,8 +133,8 @@ const ManageSurvey = () => {
     let message = {
       surveyUrl: surveryURL,
       title: surveyname,
-      description: '',
-      imageUrl: '',
+      description: description,
+      imageUrl: imgurl,
       questionList: cart,
     };
 
@@ -271,6 +275,36 @@ const ManageSurvey = () => {
               value={surveyname}
               onChange={(e) => {
                 setSurveyName(e.target.value);
+              }}
+            />
+                        <hr></hr>
+            <h4>Description</h4>
+
+            <input
+              type='text'
+              className='form-control'
+              id='formImgUrl'
+              name='formImgUrl'
+              placeholder=''
+              maxLength='250'
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            />
+            <hr></hr>
+            <h4>Image Url</h4>
+
+            <input
+              type='text'
+              className='form-control'
+              id='formImgUrl'
+              name='formImgUrl'
+              placeholder=''
+              maxLength='250'
+              value={imgurl}
+              onChange={(e) => {
+                setImgurl(e.target.value);
               }}
             />
             <hr></hr>

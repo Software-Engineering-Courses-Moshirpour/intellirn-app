@@ -10,7 +10,7 @@ const SurveyList = () => {
     <div className='table-responsive'>
       <table className='table table-hover' id='dataTable' width='100%'>
         <tbody>
-          {data?.map((dataItem) => {
+          {data?.slice(0).reverse().map((dataItem) => {
             let { title, surveyUrl } = dataItem;
 
             return (
