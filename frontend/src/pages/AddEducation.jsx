@@ -1,42 +1,38 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Embed from "../components/CreateEmbed";
-import Topic from "../components/CreateTopic";
+import EducationMenu from "../components/EducationMenu";
 import { postCall } from "../helpers/postCall";
-import useDidMountEffect from "../helpers/customHook";
 
 function AddEducation(props) {
-    const [content, setContent] = useState([]);
-    const [embedings, setEmbedings] = useState([]);
-    const [topic, setTopic] = useState("");
-    const onAddBtnClick = (event) => {
-        setContent(
-            content.concat({
-                section: "",
-                url: "",
-                type: "Link",
-            })
-        );
-    };
-
-    useDidMountEffect(() => {
-        setEmbedings(
-            embedings.concat(
-                <Embed
-                    key={embedings.length}
-                    id={embedings.length}
-                    content={content}
-                    setContent={setContent}
-                />
-            )
-        );
-    }, [content.length]);
+    const [education, setEducation] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [image, setImage] = useState("");
+    const [video, setVideo] = useState("");
 
     const onSubmit = (event) => {
-        console.log(content);
+      const url = 'api/education'
+      const message = {
+        education_url: education,
+        title: title,
+        description: description,
+        image_url: image,
+        video_url: video,
+      };
+
+      postCall(url, message).then((result) => {
+        window.alert(result['data']['message']);
+        if (result['status'] === 200) {
+          setEducation('');
+          setTitle('');
+          setDescription('');
+          setImage('');
+          setVideo('');
+        };
+      })
     };
 
     return (
@@ -65,24 +61,16 @@ function AddEducation(props) {
 
                 <section className="inner-page">
                     <div className="container">
-                        <Topic setTopic={setTopic} />
-                        <button
-                            onClick={onAddBtnClick}
-                            className="btn btn-primary my-2"
-                        >
-                            Add Content
+                        <EducationMenu
+                            setEducation={setEducation}
+                            setTitle={setTitle}
+                            setDescription={setDescription}
+                            setImage={setImage}
+                            setVideo={setVideo}
+                        />
+                        <button class="btn btn-primary" onClick={onSubmit}>
+                            Submit
                         </button>
-                        {embedings}
-                        <br></br>
-                        {embedings.length > 0 && (
-                            <button
-                                type="submit"
-                                onClick={onSubmit}
-                                className="btn btn-danger my-2"
-                            >
-                                Complete
-                            </button>
-                        )}
                     </div>
                 </section>
             </main>

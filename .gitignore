@@ -52,3 +52,4 @@ yarn-error.log*
 
 # other
 *.xlsx
+package-lock.json
