@@ -26,9 +26,6 @@ public class Question implements Serializable {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "image_url")
-    private String imageUrl;
-
     @Column(name = "stem")
     private String stem;
 
