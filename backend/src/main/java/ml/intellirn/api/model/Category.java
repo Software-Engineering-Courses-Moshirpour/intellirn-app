@@ -11,16 +11,19 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "survey")
+@Table(name = "category")
 public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long categoryId;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "category_url", nullable = false)
+    private String categoryUrl;
+
+    @Column(name = "category_name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "education", cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "category", cascade = { CascadeType.ALL })
     private List<Education> educationList;
 }

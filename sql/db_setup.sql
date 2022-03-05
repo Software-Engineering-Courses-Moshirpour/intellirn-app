@@ -29,16 +29,26 @@ CREATE TABLE question (
     CONSTRAINT fk_question_survey FOREIGN KEY (survey_id) REFERENCES survey (id) ON DELETE CASCADE
 );
 
+create table category (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    category_url VARCHAR(255) NOT NULL,
+    category_name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE education (
     id BIGINT NOT NULL AUTO_INCREMENT,
     education_url VARCHAR(255) NOT NULL,
     title VARCHAR(255),
     description MEDIUMTEXT,
     image_url VARCHAR(255),
-    video_url VARCHAR(255),
+    object_url VARCHAR(255),
     creation_date DATE,
     last_update_date DATE,
-    PRIMARY KEY (id)
+    link_type varchar(255),
+    category_id bigint not null,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES category (id)
 );
 
 CREATE TABLE admin (
@@ -92,8 +102,11 @@ INSERT INTO question (id,survey_id,content,stem,next_url,uid) VALUES
 ("11","2","End","NO",NULL,"9");
 
 
+INSERT INTO category (category_url,category_name) VALUES
+("iv-site","IV Site");
 
-INSERT INTO education (education_url,title,description,image_url,video_url,creation_date,last_update_date) VALUES
+
+INSERT INTO education (education_url,title,description,image_url,object_url,link_type,category_id,creation_date,last_update_date) VALUES
 ("how-to-deal-with-allergic-reaction","A super informative article","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nunc sed velit dignissim sodales. Tristique magna sit amet purus gravida quis blandit. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. Porttitor lacus luctus accumsan tortor posuere ac ut. Augue eget arcu dictum varius duis at consectetur lorem. Facilisis magna etiam tempor orci eu lobortis elementum nibh tellus. Amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Cras adipiscing enim eu turpis egestas pretium. Aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus.
 
 At ultrices mi tempus imperdiet. Euismod lacinia at quis risus sed. Consectetur libero id faucibus nisl. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim. Lobortis mattis aliquam faucibus purus in massa tempor nec feugiat. Molestie at elementum eu facilisis sed. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum. Habitant morbi tristique senectus et netus. Duis ut diam quam nulla porttitor massa id. Ornare aenean euismod elementum nisi. Pellentesque habitant morbi tristique senectus et. Amet nulla facilisi morbi tempus iaculis. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Vitae sapien pellentesque habitant morbi tristique.
@@ -102,7 +115,7 @@ Neque egestas congue quisque egestas diam in arcu cursus euismod. Cursus euismod
 
 Et netus et malesuada fames ac turpis egestas maecenas. Mattis aliquam faucibus purus in massa tempor. Nulla at volutpat diam ut venenatis tellus in. Dui nunc mattis enim ut tellus elementum. Dis parturient montes nascetur ridiculus. Non quam lacus suspendisse faucibus interdum. Elementum curabitur vitae nunc sed velit dignissim sodales ut. Duis ut diam quam nulla. Arcu risus quis varius quam quisque id. Habitasse platea dictumst vestibulum rhoncus. Ut lectus arcu bibendum at. Pharetra sit amet aliquam id diam maecenas. Donec adipiscing tristique risus nec feugiat in. Nulla at volutpat diam ut venenatis tellus. Cras fermentum odio eu feugiat pretium. Venenatis cras sed felis eget velit aliquet sagittis id consectetur. Neque vitae tempus quam pellentesque nec. Sapien faucibus et molestie ac. Tempus urna et pharetra pharetra massa massa ultricies mi. Sed ullamcorper morbi tincidunt ornare massa eget.
 
-Diam quis enim lobortis scelerisque fermentum dui. Dui sapien eget mi proin sed libero enim. Aliquam nulla facilisi cras fermentum odio. Sem et tortor consequat id porta. Non arcu risus quis varius quam quisque id diam vel. Consectetur a erat nam at lectus urna duis convallis convallis. Elementum facilisis leo vel fringilla est. Commodo elit at imperdiet dui accumsan. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin aliquam. Odio ut enim blandit volutpat maecenas volutpat. Eget nunc scelerisque viverra mauris. Faucibus vitae aliquet nec ullamcorper sit amet risus nullam eget. Ac tortor dignissim convallis aenean.","https://image.shutterstock.com/z/stock-vector-seasonal-allergy-sick-symptoms-problem-infographic-vector-flat-cartoon-illustration-icon-design-789355267.jpg","https://www.youtube.com/watch?v=huRybKL4Hhk","2022-02-23","2022-02-23");
+Diam quis enim lobortis scelerisque fermentum dui. Dui sapien eget mi proin sed libero enim. Aliquam nulla facilisi cras fermentum odio. Sem et tortor consequat id porta. Non arcu risus quis varius quam quisque id diam vel. Consectetur a erat nam at lectus urna duis convallis convallis. Elementum facilisis leo vel fringilla est. Commodo elit at imperdiet dui accumsan. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin aliquam. Odio ut enim blandit volutpat maecenas volutpat. Eget nunc scelerisque viverra mauris. Faucibus vitae aliquet nec ullamcorper sit amet risus nullam eget. Ac tortor dignissim convallis aenean.","https://image.shutterstock.com/z/stock-vector-seasonal-allergy-sick-symptoms-problem-infographic-vector-flat-cartoon-illustration-icon-design-789355267.jpg","https://www.youtube.com/watch?v=huRybKL4Hhk","YouTube","1","2022-02-23","2022-02-23");
 
 
 INSERT INTO admin (first_name,middle_name,last_name,email,password) VALUES
