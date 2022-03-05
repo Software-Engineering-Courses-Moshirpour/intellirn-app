@@ -82,7 +82,7 @@ function AddEducation(props) {
                         <Topic setTopic={setTopic} />
                         <button
                             onClick={onAddBtnClick}
-                            className="btn btn-primary mb-5"
+                            className="btn btn-primary ml-2"
                         >
                             Add Article
                         </button>
@@ -91,7 +91,7 @@ function AddEducation(props) {
                             <button
                                 type="submit"
                                 onClick={onSubmit}
-                                className="btn btn-danger mb-3"
+                                className="btn btn-danger ml-2"
                             >
                                 Complete
                             </button>

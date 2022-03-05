@@ -8,7 +8,7 @@ function EdForm(props) {
                     <label>Topic</label>
                     <input
                         type="text"
-                        class="form-control"
+                        className="form-control mb-2"
                         placeholder="Topic Name"
                         onChange={(newTopic) => props.setTopic(newTopic)}
                     />
