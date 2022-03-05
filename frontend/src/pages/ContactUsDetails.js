@@ -18,7 +18,7 @@ const ContactUsDetails = () => {
     deleteCall(thisurl).then((result) => {
       window.alert(result['data']['message']);
 
-      if (result['status'] == 200) {
+      if (result['status'] === 200) {
         navigate('/admin-menu/contactus');
       }
     });
