@@ -35,6 +35,7 @@ const SurveyDetails = () => {
         setContent(details['questionList'][i]['content']);
       }
       if (details['questionList'][i]['nextUrl']!='' ){
+        console.log('link triggered')
         navigate('/survey/'+details['questionList'][i]['nextUrl']);
       }
 
