@@ -12,7 +12,7 @@ export function useAuth() {
       return new Promise((res) => {
         setAuthed(1);
 
-        localStorage.setItem('Auth', 1);
+        localStorage.setItem('Auth', '1');
         res();
       });
     },
@@ -20,7 +20,7 @@ export function useAuth() {
     logout() {
       return new Promise((res) => {
         setAuthed(1);
-        localStorage.setItem('Auth', 0);
+        localStorage.setItem('Auth', '0');
         res();
       });
     },

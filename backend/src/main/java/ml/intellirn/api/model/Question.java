@@ -26,11 +26,11 @@ public class Question implements Serializable {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "image_url")
-    private String imageUrl;
-
     @Column(name = "stem")
     private String stem;
+
+    @Column(name = "next_url")
+    private String nextUrl;
 
     @Column(name = "uid")
     private Long uid;

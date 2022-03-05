@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { postCall } from '../helpers/postCall';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const Contact = () => {
+  const [message, setMessage] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    window.alert('Details submitted');
+
+    postCall('/api/contactus', message).then((result) => {
+      window.alert(result['data']['message']);
+
+      if (result['status'] === 200) {
+        setMessage({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        });
+      }
+    });
+
     document.getElementById('contactform').reset();
   };
 
@@ -60,13 +81,21 @@ const Contact = () => {
                   <div className='email'>
                     <i className='bi bi-envelope'></i>
                     <h4>Email:</h4>
-                    <p>info@intellirn.ml</p>
+                    <p>
+                      <a href='mailto:info@intellirn.ml' style={{ color: 'inherit' }}>
+                        info@intellirn.ml
+                      </a>
+                    </p>
                   </div>
 
                   <div className='phone'>
                     <i className='bi bi-phone'></i>
                     <h4>Call:</h4>
-                    <p>+1 9876 5432 10</p>
+                    <p>
+                      <a href='tel:+19876543210' style={{ color: 'inherit' }}>
+                        +1 9876 5432 10
+                      </a>
+                    </p>
                   </div>
 
                   <img src={`${process.env.PUBLIC_URL + '/images/hospital_reception.svg'}`} alt='hospital reception' />
@@ -74,24 +103,67 @@ const Contact = () => {
               </div>
 
               <div className='col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch'>
-                <form onSubmit={handleSubmit} className='php-email-form' id='contactform'>
+                <form className='php-email-form' id='contactform' onSubmit={handleSubmit}>
                   <div className='row'>
                     <div className='form-group col-md-6'>
                       <label htmlFor='name'>Your Name</label>
-                      <input type='text' name='name' className='form-control' id='name' required />
+                      <input
+                        type='text'
+                        name='name'
+                        className='form-control'
+                        id='name'
+                        maxLength='100'
+                        value={message['name']}
+                        required
+                        onChange={(e) => {
+                          setMessage({ ...message, name: e.target.value });
+                        }}
+                      />
                     </div>
                     <div className='form-group col-md-6 mt-3 mt-md-0'>
                       <label htmlFor='name'>Your Email</label>
-                      <input type='email' className='form-control' name='email' id='email' required />
+                      <input
+                        type='email'
+                        className='form-control'
+                        name='email'
+                        id='email'
+                        maxLength='100'
+                        value={message['email']}
+                        required
+                        onChange={(e) => {
+                          setMessage({ ...message, email: e.target.value });
+                        }}
+                      />
                     </div>
                   </div>
                   <div className='form-group mt-3'>
                     <label htmlFor='name'>Subject</label>
-                    <input type='text' className='form-control' name='subject' id='subject' required />
+                    <input
+                      type='text'
+                      className='form-control'
+                      name='subject'
+                      id='subject'
+                      maxLength='100'
+                      value={message['subject']}
+                      required
+                      onChange={(e) => {
+                        setMessage({ ...message, subject: e.target.value });
+                      }}
+                    />
                   </div>
                   <div className='form-group mt-3'>
                     <label htmlFor='name'>Message</label>
-                    <textarea className='form-control' name='message' rows='10' required></textarea>
+                    <textarea
+                      className='form-control'
+                      name='message'
+                      rows='10'
+                      maxLength='1000'
+                      value={message['message']}
+                      onChange={(e) => {
+                        setMessage({ ...message, message: e.target.value });
+                      }}
+                      required
+                    ></textarea>
                   </div>
                   <div className='my-3'>
                     <div className='loading'>Loading</div>
