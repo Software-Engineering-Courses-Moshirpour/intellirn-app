@@ -13,7 +13,7 @@ const CreateSurvey = () => {
     questionId: '',
     stem: '',
     content: '',
-    next_url: '',
+    nextUrl: '',
     uid: '',
   });
 
@@ -25,7 +25,7 @@ const CreateSurvey = () => {
         questionId: cart.length + 1,
         stem: details['stem'],
         content: details['content'],
-        next_url: details['next_url'],
+        nextUrl: details['nextUrl'],
         uid: details['uid'],
       });
       setCid(cart.length + 1);
@@ -35,7 +35,7 @@ const CreateSurvey = () => {
           console.log('update target found');
           newCart[i]['stem'] = details['stem'];
           newCart[i]['content'] = details['content'];
-          newCart[i]['next_url'] = details['next_url'];
+          newCart[i]['nextUrl'] = details['nextUrl'];
           newCart[i]['uid'] = details['uid'];
 
           setCart([...newCart]);
@@ -49,7 +49,7 @@ const CreateSurvey = () => {
       questionId: '',
       stem: '',
       content: '',
-      next_url: '',
+      nextUrl: '',
       uid: '',
     });
 
@@ -72,7 +72,7 @@ const CreateSurvey = () => {
         tempDetails['questionId'] = newCart[i]['questionId'];
         tempDetails['stem'] = newCart[i]['stem'];
         tempDetails['content'] = newCart[i]['content'];
-        tempDetails['next_url'] = newCart[i]['next_url'];
+        tempDetails['nextUrl'] = newCart[i]['nextUrl'];
         tempDetails['uid'] = newCart[i]['uid'];
         setCid(tempDetails['questionId']);
         setDetails(tempDetails);
@@ -125,7 +125,7 @@ const CreateSurvey = () => {
           questionId: '',
           stem: '',
           content: '',
-          next_url: '',
+          nextUrl: '',
           uid: '',
         });
       }
@@ -201,9 +201,9 @@ const CreateSurvey = () => {
                     name='formImgUrl'
                     placeholder='health.com/hi.png'
                     maxLength='250'
-                    value={details['next_url']}
+                    value={details['nextUrl']}
                     onChange={(e) => {
-                      setDetails({ ...details, next_url: e.target.value });
+                      setDetails({ ...details, nextUrl: e.target.value });
                     }}
                   />
                 </div>
