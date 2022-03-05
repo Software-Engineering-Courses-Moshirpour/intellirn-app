@@ -2,7 +2,6 @@ package ml.intellirn.api.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import com.fasterxml.jackson.annotation.*;
 import java.time.LocalDate;
 import lombok.*;
 
@@ -20,7 +19,6 @@ public class Education implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "fk_category"))
-    @JsonIgnore
     private Category category;
 
     // youtube vs ahs link

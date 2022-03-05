@@ -5,7 +5,6 @@ import ml.intellirn.api.repository.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +17,14 @@ import javax.transaction.Transactional;
 @RequestMapping("api/category")
 public class CategoryController {
     @Autowired
-    private EducationRepository educationRepository;
+    private CategoryRepository categoryRepository;
 
-    private List<Education> searchEducationById(Long id) {
-        Optional<Education> educationOptional = this.educationRepository.findById(id);
+    private List<Category> searchCategoryById(Long id) {
+        Optional<Category> categoryOptional = this.categoryRepository.findById(id);
 
-        if (educationOptional.isPresent()) {
-            List<Education> searchResults = new ArrayList<>();
-            searchResults.add(educationOptional.get());
+        if (categoryOptional.isPresent()) {
+            List<Category> searchResults = new ArrayList<>();
+            searchResults.add(categoryOptional.get());
             return searchResults;
         }
 
@@ -34,39 +33,40 @@ public class CategoryController {
         }
     }
 
-    private List<Education> searchEducationByEducationUrl(List<Education> allEducations, String sT) {
+    private List<Category> searchCategoryByCategoryUrl(List<Category> allCategories, String sT) {
         String searchTerm = sT.toLowerCase();
-        List<Education> searchResults = new ArrayList<>();
+        List<Category> searchResults = new ArrayList<>();
 
-        for (Education eachEducation : allEducations) {
-            if (eachEducation.getEducationUrl() != null
-                    && eachEducation.getEducationUrl().equalsIgnoreCase(searchTerm)) {
-                searchResults.add(eachEducation);
+        for (Category eachCategory : allCategories) {
+            if (eachCategory.getCategoryUrl() != null
+                    && eachCategory.getCategoryUrl().equalsIgnoreCase(searchTerm)) {
+                searchResults.add(eachCategory);
             }
         }
 
         return searchResults;
     }
 
-    private List<Education> searchEducationByTitle(List<Education> allEducations, String sT) {
+    private List<Category> searchCategoryByName(List<Category> allCategories, String sT) {
         String searchTerm = sT.toLowerCase();
-        List<Education> searchResults = new ArrayList<>();
+        List<Category> searchResults = new ArrayList<>();
 
-        for (Education eachEducation : allEducations) {
-            if (eachEducation.getTitle() != null && eachEducation.getTitle().contains(searchTerm)) {
-                searchResults.add(eachEducation);
+        for (Category eachCategory : allCategories) {
+            if (eachCategory.getName() != null &&
+                    eachCategory.getName().contains(searchTerm)) {
+                searchResults.add(eachCategory);
             }
         }
 
         return searchResults;
     }
 
-    @GetMapping(path = "{educationId}")
-    public ResponseEntity<?> getEducationById(@PathVariable("educationId") Long id) {
-        List<Education> e = this.searchEducationById(id);
+    @GetMapping(path = "{categoryId}")
+    public ResponseEntity<?> getCategoryById(@PathVariable("categoryId") Long id) {
+        List<Category> e = this.searchCategoryById(id);
 
         if (e == null) {
-            String message = String.format("Education with ID %d not found", id);
+            String message = String.format("Category with ID %d not found", id);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorBody(HttpStatus.NOT_FOUND, message));
         }
 
@@ -76,52 +76,52 @@ public class CategoryController {
     }
 
     @GetMapping()
-    public ResponseEntity<?> searchEducations(@RequestParam(name = "searchBy", required = false) String searchBy,
+    public ResponseEntity<?> searchCategories(@RequestParam(name = "searchBy", required = false) String searchBy,
             @RequestParam(name = "searchTerm", required = false) String searchTerm) {
 
-        List<Education> allEducations = this.educationRepository.findAll();
+        List<Category> allCategories = this.categoryRepository.findAll();
 
         if (searchBy == null || searchTerm == null) {
-            return ResponseEntity.status(HttpStatus.OK).body(allEducations);
+            return ResponseEntity.status(HttpStatus.OK).body(allCategories);
         }
 
         else if (searchBy.equals("") || searchTerm.equals("")) {
-            return ResponseEntity.status(HttpStatus.OK).body(allEducations);
+            return ResponseEntity.status(HttpStatus.OK).body(allCategories);
         }
 
-        else if (searchBy.equalsIgnoreCase("educationurl")) {
+        else if (searchBy.equalsIgnoreCase("categoryurl")) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(this.searchEducationByEducationUrl(allEducations, searchTerm));
+                    .body(this.searchCategoryByCategoryUrl(allCategories, searchTerm));
         }
 
-        else if (searchBy.equalsIgnoreCase("title")) {
-            return ResponseEntity.status(HttpStatus.OK).body(this.searchEducationByTitle(allEducations, searchTerm));
+        else if (searchBy.equalsIgnoreCase("name")) {
+            return ResponseEntity.status(HttpStatus.OK).body(this.searchCategoryByName(allCategories, searchTerm));
         }
 
         else {
-            String message = "Invalid education search operation";
+            String message = "Invalid category search operation";
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorBody(HttpStatus.BAD_REQUEST, message));
         }
     }
 
-    private boolean isEducationUrlUnique(Education e) {
+    private boolean isCategoryUrlUnique(Category c) {
         boolean flag = true;
-        String suppliedEducationUrl = e.getEducationUrl();
+        String suppliedCategoryUrl = c.getCategoryUrl();
 
-        if (suppliedEducationUrl == null || suppliedEducationUrl.equals("")) {
+        if (suppliedCategoryUrl == null || suppliedCategoryUrl.equals("")) {
             flag = false;
         }
 
         else {
-            List<Education> allEducations = this.educationRepository.findAll();
+            List<Category> allCategories = this.categoryRepository.findAll();
 
-            for (Education eachEducation : allEducations) {
-                if (eachEducation.getEducationId() == e.getEducationId()) {
+            for (Category eachCategory : allCategories) {
+                if (eachCategory.getCategoryId() == c.getCategoryId()) {
                     continue;
                 }
 
-                if (eachEducation.getEducationUrl() != null
-                        && eachEducation.getEducationUrl().equalsIgnoreCase(suppliedEducationUrl)) {
+                if (eachCategory.getCategoryUrl() != null
+                        && eachCategory.getCategoryUrl().equalsIgnoreCase(suppliedCategoryUrl)) {
                     flag = false;
                     break;
                 }
@@ -131,89 +131,93 @@ public class CategoryController {
         return flag;
     }
 
-    private boolean isEducationUrlValid(Education e) {
+    private boolean isCategoryUrlValid(Category c) {
         String regex = "^[a-zA-Z0-9-_]+$";
-        String suppliedEducationUrl = e.getEducationUrl();
+        String suppliedCategoryUrl = c.getCategoryUrl();
 
-        return suppliedEducationUrl.matches(regex);
+        return suppliedCategoryUrl.matches(regex);
     }
 
     @PostMapping
-    public ResponseEntity<?> addEducation(@RequestBody Education e) {
-        e.setEducationId(0L);
-        e.setCreationDate(LocalDate.now());
-        e.setLastUpdateDate(LocalDate.now());
+    public ResponseEntity<?> addCategory(@RequestBody Category c) {
+        c.setCategoryId(0L);
 
-        if (this.isEducationUrlValid(e)) {
-            if (this.isEducationUrlUnique(e)) {
-                this.educationRepository.save(e);
+        if (this.isCategoryUrlValid(c)) {
+            if (this.isCategoryUrlUnique(c)) {
+                this.categoryRepository.save(c);
 
-                String message = "Education added successfully";
+                String message = "Category added successfully";
                 return ResponseEntity.status(HttpStatus.OK).body(new ErrorBody(HttpStatus.OK, message));
             }
 
             else {
-                String message = String.format("\"%s\" URL is already taken", e.getEducationUrl());
+                String message = String.format("\"%s\" URL is already taken", c.getCategoryUrl());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ErrorBody(HttpStatus.BAD_REQUEST, message));
             }
         }
 
         else {
-            String message = String.format("\"%s\" URL is not valid", e.getEducationUrl());
+            String message = String.format("\"%s\" URL is not valid", c.getCategoryUrl());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ErrorBody(HttpStatus.BAD_REQUEST, message));
         }
     }
 
-    @PutMapping(path = "{educationId}")
-    public ResponseEntity<?> updateEducation(@RequestBody Education e, @PathVariable("educationId") Long educationId) {
-        Optional<Education> educationOptional = this.educationRepository.findById(educationId);
+    @PutMapping(path = "{categoryId}")
+    public ResponseEntity<?> updateCategory(@RequestBody Category c, @PathVariable("categoryId") Long categoryId) {
+        Optional<Category> categoryOptional = this.categoryRepository.findById(categoryId);
 
-        if (educationOptional.isPresent()) {
-            Education originalEducation = educationOptional.get();
-            e.setEducationId(originalEducation.getEducationId());
-            e.setCreationDate(originalEducation.getCreationDate());
+        if (categoryOptional.isPresent()) {
+            Category originalCategory = categoryOptional.get();
+            c.setCategoryId(originalCategory.getCategoryId());
 
-            if (this.isEducationUrlValid(e)) {
-                if (this.isEducationUrlUnique(e)) {
-                    e.setLastUpdateDate(LocalDate.now());
-                    this.educationRepository.save(e);
+            if (this.isCategoryUrlValid(c)) {
+                if (this.isCategoryUrlUnique(c)) {
+                    this.categoryRepository.save(c);
 
-                    String message = "Education updated successfully";
+                    String message = "Category updated successfully";
                     return ResponseEntity.status(HttpStatus.OK).body(new ErrorBody(HttpStatus.OK, message));
                 }
 
                 else {
-                    String message = String.format("\"%s\" URL is already taken", e.getEducationUrl());
+                    String message = String.format("\"%s\" URL is already taken", c.getCategoryUrl());
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                             .body(new ErrorBody(HttpStatus.BAD_REQUEST, message));
                 }
             }
 
             else {
-                String message = String.format("\"%s\" URL is not valid", e.getEducationUrl());
+                String message = String.format("\"%s\" URL is not valid", c.getCategoryUrl());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ErrorBody(HttpStatus.BAD_REQUEST, message));
             }
         }
 
         else {
-            String message = String.format("Education with ID %d not found", educationId);
+            String message = String.format("Category with ID %d not found", categoryId);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorBody(HttpStatus.NOT_FOUND, message));
         }
     }
 
-    @DeleteMapping(path = "{educationId}")
-    public ResponseEntity<?> deleteEducation(@PathVariable("educationId") Long educationId) {
-        if (!this.educationRepository.existsById(educationId)) {
-            String message = String.format("Education with ID %d not found", educationId);
+    @DeleteMapping(path = "{categoryId}")
+    public ResponseEntity<?> deleteCategory(@PathVariable("categoryId") Long categoryId) {
+        if (!this.categoryRepository.existsById(categoryId)) {
+            String message = String.format("Category with ID %d not found", categoryId);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorBody(HttpStatus.NOT_FOUND, message));
         }
 
         else {
-            this.educationRepository.deleteById(educationId);
-            String message = String.format("Education with ID %d deleted successfully", educationId);
+            Category c = this.categoryRepository.getById(categoryId);
+
+            if (c.getEducationList().size() > 0) {
+                String message = String.format("Cannot delete category with existing articles", categoryId);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ErrorBody(HttpStatus.BAD_REQUEST, message));
+            }
+
+            this.categoryRepository.deleteById(categoryId);
+            String message = String.format("Category with ID %d deleted successfully", categoryId);
             return ResponseEntity.status(HttpStatus.OK).body(new ErrorBody(HttpStatus.OK, message));
         }
     }

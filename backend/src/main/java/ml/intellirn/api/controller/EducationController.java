@@ -18,6 +18,9 @@ import javax.transaction.Transactional;
 @RequestMapping("api/education")
 public class EducationController {
     @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
     private EducationRepository educationRepository;
 
     private List<Education> searchEducationById(Long id) {
@@ -61,6 +64,42 @@ public class EducationController {
         return searchResults;
     }
 
+    private List<Education> searchEducationByCategoryName(List<Education> allEducations, String sT) {
+        String searchTerm = sT.toLowerCase();
+        List<Education> searchResults = new ArrayList<>();
+
+        for (Education eachEducation : allEducations) {
+            if (eachEducation.getCategory() != null
+                    && eachEducation.getCategory().getName().equalsIgnoreCase(searchTerm)) {
+                searchResults.add(eachEducation);
+            }
+        }
+
+        return searchResults;
+    }
+
+    private List<Education> searchEducationByCategoryId(List<Education> allEducations, String sT) {
+        String searchTerm = sT.toLowerCase();
+        List<Education> searchResults = new ArrayList<>();
+
+        try {
+            int suppliedCategoryId = Integer.parseInt(searchTerm);
+
+            for (Education eachEducation : allEducations) {
+                if (eachEducation.getCategory() != null
+                        && eachEducation.getCategory().getCategoryId() == suppliedCategoryId) {
+                    searchResults.add(eachEducation);
+                }
+            }
+
+            return searchResults;
+        }
+
+        catch (NumberFormatException e) {
+            return searchResults;
+        }
+    }
+
     @GetMapping(path = "{educationId}")
     public ResponseEntity<?> getEducationById(@PathVariable("educationId") Long id) {
         List<Education> e = this.searchEducationById(id);
@@ -96,6 +135,16 @@ public class EducationController {
 
         else if (searchBy.equalsIgnoreCase("title")) {
             return ResponseEntity.status(HttpStatus.OK).body(this.searchEducationByTitle(allEducations, searchTerm));
+        }
+
+        else if (searchBy.equalsIgnoreCase("categoryname")) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(this.searchEducationByCategoryName(allEducations, searchTerm));
+        }
+
+        else if (searchBy.equalsIgnoreCase("categoryid")) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(this.searchEducationByCategoryId(allEducations, searchTerm));
         }
 
         else {
@@ -146,10 +195,26 @@ public class EducationController {
 
         if (this.isEducationUrlValid(e)) {
             if (this.isEducationUrlUnique(e)) {
-                this.educationRepository.save(e);
+                Optional<Category> suppliedOptionalCategory = this.categoryRepository
+                        .findById(e.getCategory().getCategoryId());
 
-                String message = "Education added successfully";
-                return ResponseEntity.status(HttpStatus.OK).body(new ErrorBody(HttpStatus.OK, message));
+                if (!suppliedOptionalCategory.isPresent()) {
+                    String message = String.format("Cannot find category with ID %d", e.getCategory().getCategoryId());
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                            .body(new ErrorBody(HttpStatus.BAD_REQUEST, message));
+                }
+
+                else {
+                    Category suppliedCategory = suppliedOptionalCategory.get();
+                    suppliedCategory.getEducationList().add(e);
+
+                    // this.categoryRepository.save(suppliedCategory);
+                    e.setCategory(suppliedCategory);
+                    this.educationRepository.save(e);
+
+                    String message = "Education added successfully";
+                    return ResponseEntity.status(HttpStatus.OK).body(new ErrorBody(HttpStatus.OK, message));
+                }
             }
 
             else {
@@ -173,15 +238,43 @@ public class EducationController {
         if (educationOptional.isPresent()) {
             Education originalEducation = educationOptional.get();
             e.setEducationId(originalEducation.getEducationId());
-            e.setCreationDate(originalEducation.getCreationDate());
 
             if (this.isEducationUrlValid(e)) {
                 if (this.isEducationUrlUnique(e)) {
-                    e.setLastUpdateDate(LocalDate.now());
-                    this.educationRepository.save(e);
+                    Optional<Category> suppliedOptionalCategory = this.categoryRepository
+                            .findById(e.getCategory().getCategoryId());
 
-                    String message = "Education updated successfully";
-                    return ResponseEntity.status(HttpStatus.OK).body(new ErrorBody(HttpStatus.OK, message));
+                    if (!suppliedOptionalCategory.isPresent()) {
+                        String message = String.format("Cannot find category with ID %d",
+                                e.getCategory().getCategoryId());
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                .body(new ErrorBody(HttpStatus.BAD_REQUEST, message));
+                    }
+
+                    else {
+                        Category suppliedCategory = suppliedOptionalCategory.get();
+                        e.setCategory(suppliedCategory);
+
+                        List<Education> newEducationList = new ArrayList<>();
+                        List<Education> existingEducationList = suppliedCategory.getEducationList();
+
+                        for (Education eachEducation : existingEducationList) {
+                            if (eachEducation.getEducationId() != e.getEducationId()) {
+                                newEducationList.add(eachEducation);
+                            }
+
+                            else {
+                                newEducationList.add(e);
+                            }
+                        }
+
+                        suppliedCategory.setEducationList(newEducationList);
+                        this.categoryRepository.save(suppliedCategory);
+                        this.educationRepository.save(e);
+
+                        String message = "Education updated successfully";
+                        return ResponseEntity.status(HttpStatus.OK).body(new ErrorBody(HttpStatus.OK, message));
+                    }
                 }
 
                 else {
@@ -196,6 +289,7 @@ public class EducationController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ErrorBody(HttpStatus.BAD_REQUEST, message));
             }
+
         }
 
         else {
@@ -212,7 +306,27 @@ public class EducationController {
         }
 
         else {
+            Education toBeDelete = this.educationRepository.findById(educationId).get();
+
+            Category categoryOfToBeDelete = toBeDelete.getCategory();
+
+            List<Education> newEducationList = new ArrayList<>();
+            List<Education> existingEducationList = categoryOfToBeDelete.getEducationList();
+
+            for (Education eachEducation : existingEducationList) {
+                if (eachEducation.getEducationId() != toBeDelete.getEducationId()) {
+                    newEducationList.add(eachEducation);
+                }
+
+                else {
+                    continue;
+                }
+            }
+            categoryOfToBeDelete.setEducationList(newEducationList);
+
             this.educationRepository.deleteById(educationId);
+            this.categoryRepository.save(categoryOfToBeDelete);
+
             String message = String.format("Education with ID %d deleted successfully", educationId);
             return ResponseEntity.status(HttpStatus.OK).body(new ErrorBody(HttpStatus.OK, message));
         }

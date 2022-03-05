@@ -1,6 +1,7 @@
 package ml.intellirn.api.model;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -25,5 +26,6 @@ public class Category implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = { CascadeType.ALL })
+    @JsonIgnore
     private List<Education> educationList;
 }
