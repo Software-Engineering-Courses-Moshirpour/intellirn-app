@@ -29,6 +29,9 @@ public class Question implements Serializable {
     @Column(name = "stem")
     private String stem;
 
+    @Column(name = "next_url")
+    private String nextUrl;
+
     @Column(name = "uid")
     private Long uid;
 }

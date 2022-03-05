@@ -23,6 +23,7 @@ CREATE TABLE question (
     survey_id BIGINT NOT NULL,
     content VARCHAR(255),
     stem VARCHAR(255),
+    next_url VARCHAR(255) DEFAULT NULL,
     uid BIGINT,
     PRIMARY KEY (survey_id, id),
     CONSTRAINT fk_question_survey FOREIGN KEY (survey_id) REFERENCES survey (id) ON DELETE CASCADE
@@ -67,28 +68,29 @@ INSERT INTO survey (survey_url,title,description,image_url,creation_date,last_up
 ("iv-site","IV Site","Take a survey for your IV site",NULL,"2022-02-24","2022-02-24");
 
 
-INSERT INTO question (id,survey_id,content,stem,uid) VALUES
-("1","1","Are you having a problem with your pump?","Are you having a problem with your pump?",NULL),
-("2","1","Is your pump beeping?","Yes","1"),
-("3","1","Press SILENCE","Yes","2"),
-("4","1","No actions needed!","No","1"),
-("5","1","What does your pump say?","No","2"),
-("6","1","Is there a kink or blockage in your tubing (given instructions on what to look for)?","DISTAL OCCLUSION","5"),
-("7","1","Remove Kink","Yes","6"),
-("8","1","Is there a problem with your IV site (given instructions on how to assess IV site)?","No","6"),
-("9","1","Call clinic nurses at ### to arrange for new IV site","Yes","8"),
-("10","1","Then we also do not know what is the problem","No","8"),
-("1","2","Are you concerned about your IV site","Are you concerned about your IV site",NULL),
-("2","2","At your IV site, do you have pain","YES","1"),
-("3","2","No problem","NO","1"),
-("4","2","Press STOP/START button","YES","2"),
-("5","2","At your IV site, do you have swelling","NO","2"),
-("6","2","Press STOP/START button","YES","5"),
-("7","2","At your IV site, do you have redness","NO","5"),
-("8","2","Press STOP/START","YES","7"),
-("9","2","At your IV site, do you have leaking","NO","7"),
-("10","2","Press STOP/START","YES","9"),
-("11","2","End","NO","9");
+INSERT INTO question (id,survey_id,content,stem,next_url,uid) VALUES
+("1","1","Are you having a problem with your pump?","Are you having a problem with your pump?",NULL,NULL),
+("2","1","Is your pump beeping?","Yes",NULL,"1"),
+("3","1","Press SILENCE","Yes",NULL,"2"),
+("4","1","No actions needed!","No",NULL,"1"),
+("5","1","What does your pump say?","No",NULL,"2"),
+("6","1","Is there a kink or blockage in your tubing (given instructions on what to look for)?","DISTAL OCCLUSION",NULL,"5"),
+("7","1","Remove Kink","Yes",NULL,"6"),
+("8","1","Is there a problem with your IV site (given instructions on how to assess IV site)?","No",NULL,"6"),
+("9","1","Call clinic nurses at ### to arrange for new IV site","Yes",NULL,"8"),
+("10","1","Then we also do not know what is the problem","No",NULL,"8"),
+("1","2","Are you concerned about your IV site","Are you concerned about your IV site",NULL,NULL),
+("2","2","At your IV site, do you have pain","YES",NULL,"1"),
+("3","2","No problem","NO",NULL,"1"),
+("4","2","Press STOP/START button","YES",NULL,"2"),
+("5","2","At your IV site, do you have swelling","NO",NULL,"2"),
+("6","2","Press STOP/START button","YES",NULL,"5"),
+("7","2","At your IV site, do you have redness","NO",NULL,"5"),
+("8","2","Press STOP/START","YES",NULL,"7"),
+("9","2","At your IV site, do you have leaking","NO",NULL,"7"),
+("10","2","Press STOP/START","YES",NULL,"9"),
+("11","2","End","NO",NULL,"9");
+
 
 
 INSERT INTO education (education_url,title,description,image_url,video_url,creation_date,last_update_date) VALUES
