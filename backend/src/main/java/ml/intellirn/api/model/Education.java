@@ -17,6 +17,14 @@ public class Education implements Serializable {
     @Column(name = "id")
     private long educationId;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "fk_category"))
+    private Category category;
+
+    // youtube vs ahs link
+    @Column(name = "link_type")
+    private String linkType;
+
     @Column(name = "education_url", nullable = false)
     private String educationUrl;
 
@@ -29,8 +37,8 @@ public class Education implements Serializable {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "video_url")
-    private String youtubeUrl;
+    @Column(name = "object_url")
+    private String objectUrl;
 
     @Column(name = "creation_date")
     private LocalDate creationDate;

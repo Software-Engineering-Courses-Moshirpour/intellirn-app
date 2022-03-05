@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams,useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useFetch } from '../helpers/useFetch';
@@ -7,7 +7,7 @@ import { useFetch } from '../helpers/useFetch';
 const SurveyDetails = () => {
   const { id } = useParams();
   let thisurl = `/api/survey?searchBy=surveyurl&searchTerm=${id}`;
-
+  let navigate = useNavigate();
   const { loading, data } = useFetch(thisurl);
   const [details, setDetails] = useState({});
 
@@ -33,6 +33,9 @@ const SurveyDetails = () => {
     for (var i = 0; i < details['questionList'].length; i++) {
       if (details['questionList'][i]['questionId'] == e.target.value) {
         setContent(details['questionList'][i]['content']);
+      }
+      if (details['questionList'][i]['nextUrl']!='' ){
+        navigate('/survey/'+details['questionList'][i]['nextUrl']);
       }
 
       if (details['questionList'][i]['uid'] == e.target.value) {

@@ -13,7 +13,7 @@ const CreateSurvey = () => {
     questionId: '',
     stem: '',
     content: '',
-    imageUrl: '',
+    nextUrl: '',
     uid: '',
   });
 
@@ -25,7 +25,7 @@ const CreateSurvey = () => {
         questionId: cart.length + 1,
         stem: details['stem'],
         content: details['content'],
-        imageUrl: details['imageUrl'],
+        nextUrl: details['nextUrl'],
         uid: details['uid'],
       });
       setCid(cart.length + 1);
@@ -35,7 +35,7 @@ const CreateSurvey = () => {
           console.log('update target found');
           newCart[i]['stem'] = details['stem'];
           newCart[i]['content'] = details['content'];
-          newCart[i]['imageUrl'] = details['imageUrl'];
+          newCart[i]['nextUrl'] = details['nextUrl'];
           newCart[i]['uid'] = details['uid'];
 
           setCart([...newCart]);
@@ -49,7 +49,7 @@ const CreateSurvey = () => {
       questionId: '',
       stem: '',
       content: '',
-      imageUrl: '',
+      nextUrl: '',
       uid: '',
     });
 
@@ -72,7 +72,7 @@ const CreateSurvey = () => {
         tempDetails['questionId'] = newCart[i]['questionId'];
         tempDetails['stem'] = newCart[i]['stem'];
         tempDetails['content'] = newCart[i]['content'];
-        tempDetails['imageUrl'] = newCart[i]['imageUrl'];
+        tempDetails['nextUrl'] = newCart[i]['nextUrl'];
         tempDetails['uid'] = newCart[i]['uid'];
         setCid(tempDetails['questionId']);
         setDetails(tempDetails);
@@ -125,7 +125,7 @@ const CreateSurvey = () => {
           questionId: '',
           stem: '',
           content: '',
-          imageUrl: '',
+          nextUrl: '',
           uid: '',
         });
       }
@@ -191,7 +191,7 @@ const CreateSurvey = () => {
               </div>
               <div className='form-group row'>
                 <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formImgUrl'>
-                  Img Url
+                  Url
                 </label>
                 <div className='col-sm-8'>
                   <input
@@ -201,9 +201,9 @@ const CreateSurvey = () => {
                     name='formImgUrl'
                     placeholder='health.com/hi.png'
                     maxLength='250'
-                    value={details['imageUrl']}
+                    value={details['nextUrl']}
                     onChange={(e) => {
-                      setDetails({ ...details, imageUrl: e.target.value });
+                      setDetails({ ...details, nextUrl: e.target.value });
                     }}
                   />
                 </div>
