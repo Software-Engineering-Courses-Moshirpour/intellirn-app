@@ -14,6 +14,10 @@ import Login from './pages/Login';
 import Error from './pages/Error';
 import AddEducation from './pages/AddEducation';
 import EditEducation from './pages/EditEducation';
+import Education from './pages/Education';
+import CommonInfections from './pages/CommonInfections';
+import IV_Access from './pages/IV_Access';
+import Medications from './pages/Medications';
 
 function App() {
   return (
@@ -36,7 +40,10 @@ function App() {
         {/* <Route path='/admin-menu/education/edit-education/:id' element={<EditEdicationDetails />} />  */}
         {/*<Route path='/admin-menu/contactus' element={<ViewAllContactUs />} />
         <Route path='/admin-menu/contactus/:id' element={<ContactUsDetails />} />*/}
-
+        <Route path='/education' element={<Education />} />
+        <Route path='/education/common-infections' element={<CommonInfections />} />
+        <Route path='/education/iv-access' element={<IV_Access />} />
+        <Route path='/education/medications' element={<Medications />} />
         <Route path='/admin-menu' element={<RequireAuth><AdminHome /></RequireAuth>} />
         <Route path='/admin-menu/survey/create-survey' element={<RequireAuth><AddSurvey /></RequireAuth>} />
         <Route path='/admin-menu/survey/edit-survey' element={<RequireAuth><EditSurvey /></RequireAuth>} />
