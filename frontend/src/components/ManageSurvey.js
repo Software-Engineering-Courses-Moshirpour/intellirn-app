@@ -30,7 +30,7 @@ const ManageSurvey = () => {
     id: '',
     stem: '',
     content: '',
-    imageurl: '',
+    next_url: '',
     uid: '',
   });
 
@@ -42,7 +42,7 @@ const ManageSurvey = () => {
         questionId: cart.length + 1,
         stem: details['stem'],
         content: details['content'],
-        imageurl: details['imageurl'],
+        next_url: details['next_url'],
         uid: details['uid'],
       });
       setCid(cart.length + 1);
@@ -52,7 +52,7 @@ const ManageSurvey = () => {
           console.log('update target found');
           newCart[i]['stem'] = details['stem'];
           newCart[i]['content'] = details['content'];
-          newCart[i]['imageurl'] = details['imageurl'];
+          newCart[i]['next_url'] = details['next_url'];
           newCart[i]['uid'] = details['uid'];
 
           setCart([...newCart]);
@@ -66,7 +66,7 @@ const ManageSurvey = () => {
       questionId: '',
       stem: '',
       content: '',
-      imageurl: '',
+      next_url: '',
       uid: '',
     });
 
@@ -90,7 +90,7 @@ const ManageSurvey = () => {
         tempDetails['questionId'] = newCart[i]['questionId'];
         tempDetails['stem'] = newCart[i]['stem'];
         tempDetails['content'] = newCart[i]['content'];
-        tempDetails['imageurl'] = newCart[i]['imageurl'];
+        tempDetails['next_url'] = newCart[i]['next_url'];
         tempDetails['uid'] = newCart[i]['uid'];
         setCid(tempDetails['questionId']);
         setDetails(tempDetails);
@@ -221,9 +221,9 @@ const ManageSurvey = () => {
                     name='formImgUrl'
                     placeholder='health.com/hi.png'
                     maxLength='250'
-                    value={details['imageurl']}
+                    value={details['next_url']}
                     onChange={(e) => {
-                      setDetails({ ...details, imageurl: e.target.value });
+                      setDetails({ ...details, next_url: e.target.value });
                     }}
                   />
                 </div>
@@ -299,7 +299,7 @@ const ManageSurvey = () => {
                 </tfoot>
                 <tbody>
                   {cart.map((dataItem) => {
-                    let { questionId, stem, content, imageurl, uid } = dataItem;
+                    let { questionId, stem, content, next_url, uid } = dataItem;
 
                     return (
                       <tr key={questionId}>
